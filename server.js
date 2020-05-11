@@ -17,6 +17,7 @@ app.use(express.json({ extended: false })) //extended: false- allows us to use r
 app.use('/api/customers', require('./routes/api/customers'))
 app.use('/api/employees', require('./routes/api/employees'))
 app.use('/api/vehicles', require('./routes/api/vehicles'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 const port = process.env.PORT || 5000
 
