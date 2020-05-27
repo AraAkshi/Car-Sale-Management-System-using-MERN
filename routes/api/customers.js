@@ -57,7 +57,7 @@ router.post(
       //Return JWT
       const payload = {
         customer: {
-          id: customer.id, //id is the payload
+          id: customer.id, //id is in the payload
         },
       };
 

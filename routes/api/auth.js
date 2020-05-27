@@ -17,9 +17,7 @@ router.get('/', auth, async (req, res) => {
     const customer = await Customer.findById(req.customer.id).select(
       '-password'
     );
-    // const employee = await Employee.findById(req.employee.id).select(
-    //   '-password'
-    // );
+
     res.json(customer);
     //res.json(employee);
   } catch (err) {
@@ -46,14 +44,16 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      let customer = await Customer.findOne({ email });
-      if (!customer) {
+      //let user = await Customer.findOne({ email });
+      let user = await Employee.findOne({ email });
+
+      if (!user) {
         return res.status(400).json({
           errors: [{ msg: 'Invalid Email or Password. Please try again!' }],
         });
       }
 
-      const isPasswordMatch = await bcrypt.compare(password, customer.password);
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
       if (!isPasswordMatch) {
         return res.status(400).json({
           errors: [{ msg: 'Invalid Email or Password. Please try again!' }],
@@ -62,8 +62,8 @@ router.post(
 
       //Return JWT
       const payload = {
-        customer: {
-          id: customer.id, //id is the payload
+        user: {
+          id: user.id, //id is the payload
         },
       };
 

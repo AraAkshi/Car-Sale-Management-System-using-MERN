@@ -45,8 +45,10 @@ router.post(
       manufactureYear,
       seatingCapacity,
       cylinderCapacity,
+      registeredDate,
       owner,
       images,
+      specialNotes,
     } = req.body;
 
     const vehicleFields = {};
@@ -63,17 +65,29 @@ router.post(
     if (manufactureYear) vehicleFields.manufactureYear = manufactureYear;
     if (seatingCapacity) vehicleFields.seatingCapacity = seatingCapacity;
     if (cylinderCapacity) vehicleFields.cylinderCapacity = cylinderCapacity;
+    if (registeredDate) vehicleFields.registeredDate = registeredDate;
     if (owner) vehicleFields.owner = owner;
     if (images) {
       vehicleFields.images = images.split(',');
     }
+    if (specialNotes) vehicleFields.specialNotes = specialNotes;
 
     try {
-      const vehicle = await Vehicle.findOne({ chassisNo });
+      let vehicle = await Vehicle.findOne({ _id: req.params.vehicle_id });
 
       if (vehicle) {
         //Update
+        vehicle = await Vehicle.findOneAndUpdate(
+          { _id: req.params.vehicle_id },
+          { $set: vehicleFields },
+          { new: true }
+        );
+        return res.json(vehicle);
       }
+
+      //Create profile
+      vehicle = new Vehicle(vehicleFields);
+      await vehicle.save();
 
       res.json(vehicle);
     } catch (err) {
@@ -84,19 +98,36 @@ router.post(
 );
 
 // @route   GET api/vehicles
-// @desc    View vehicle
-// @access  private
-router.get('/', auth, async (req, res) => {
+// @desc    View all vehicles
+// @access  public
+router.get('/', async (req, res) => {
   try {
-    const vehicle = await Vehicle.findOne({ chassisNo });
+    const vehicles = await Vehicle.find();
 
+    res.json(vehicles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   GET api/vehicles/:vehicle_id
+// @desc    View a selected vehicle
+// @access  public
+router.get('/:vehicle_id', async (req, res) => {
+  try {
+    const vehicle = await Vehicle.findOne({ _id: req.params.vehicle_id });
+    console.log(vehicle);
     if (!vehicle) {
-      return res.status(400).json({ msg: 'No vehicle' });
+      return res.status(400).json({ msg: 'Vehicle Not Found' });
     }
 
     res.json(vehicle);
   } catch (err) {
     console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Vehicle Not Found' });
+    }
     res.status(500).send('Server error');
   }
 });
