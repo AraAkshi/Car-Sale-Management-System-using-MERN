@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
-//Create Schema
-const EmployeeSchema = new mongoose.Schema({
+const DirectCustomerSchema = new mongoose.Schema({
   nic: {
     type: String,
-    required: true,
     unique: true,
   },
   name: {
@@ -13,7 +11,6 @@ const EmployeeSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
     unique: true,
   },
   address: {
@@ -24,18 +21,16 @@ const EmployeeSchema = new mongoose.Schema({
   contact: {
     type: Number,
   },
-  designation: {
-    type: String,
-  },
-
-  password: {
-    type: String,
-    required: true,
-  },
   regDate: {
     type: Date,
     default: Date.now,
   },
+  role: {
+    type: String,
+  },
 });
 
-module.exports = Employee = mongoose.model('employees', EmployeeSchema);
+module.exports = DirectCustomer = mongoose.model(
+  'directCustomers',
+  DirectCustomerSchema
+);

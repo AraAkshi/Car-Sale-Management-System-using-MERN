@@ -64,10 +64,15 @@ const VehicleScheme = new mongoose.Schema({
     type: Date,
   },
   owner: {
-    // type: mongoose.Schema.Types.ObjectId,
-    // ref: 'employees',
-    type: String,
-    default: 'NADEESHANS',
+    customer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'customers',
+      default: null,
+    },
+    company: {
+      type: Boolean,
+      default: false,
+    },
   },
   images: {
     type: [String],
@@ -75,6 +80,14 @@ const VehicleScheme = new mongoose.Schema({
   specialNotes: {
     type: String,
     uppercase: true,
+  },
+  sold: {
+    type: Boolean,
+    default: false,
+  },
+  isInInventory: {
+    type: Boolean,
+    default: false,
   },
 });
 

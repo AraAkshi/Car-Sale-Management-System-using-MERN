@@ -1,11 +1,13 @@
 import React, { Fragment, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alerts';
+import { register } from '../../actions/clientAuth';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
-    nic: '',
     email: '',
     address: '',
     contact: '',
@@ -13,7 +15,7 @@ const Register = () => {
     password2: '',
   });
 
-  const { name, nic, email, address, contact, password, password2 } = formData;
+  const { name, email, address, contact, password, password2 } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,33 +24,15 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      console.log('pw not match');
+      setAlert('Passwords do not match', 'danger');
     } else {
-      console.log('SUCCESS');
-      // const newUser = {
-      //   name,
-      //   nic,
-      //   email,
-      //   address,
-      //   contact,
-      //   password,
-      // };
-      // console.log(newUser);
-      // try {
-      //   const config = {
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //   };
-
-      //   const body = JSON.stringify(newUser);
-      //   const res = await axios.post('/api/customers', body, config);
-      //   console.log(res.data);
-      // } catch (err) {
-      //   console.error(err.response.data);
-      // }
+      register({ name, email, address, contact, password });
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <Fragment>
@@ -69,16 +53,6 @@ const Register = () => {
           <small className='form-text'>
             Please enter your First Name and Last Name
           </small>
-        </div>
-        <div className='form-group'>
-          <input
-            type='text'
-            name='nic'
-            placeholder='NIC Number'
-            value={nic}
-            onChange={e => onChange(e)}
-            required
-          />
         </div>
         <div className='form-group'>
           <input
@@ -107,7 +81,6 @@ const Register = () => {
             minLength='10'
             value={contact}
             onChange={e => onChange(e)}
-            required
           />
         </div>
         <div className='form-group'>
@@ -118,7 +91,6 @@ const Register = () => {
             value={password}
             onChange={e => onChange(e)}
             required
-            minLength='6'
           />
           <small className='form-text'>
             Please enter a password of minimum length of 6 characters including
@@ -133,7 +105,6 @@ const Register = () => {
             value={password2}
             onChange={e => onChange(e)}
             required
-            minLength='6'
           />
         </div>
         <input type='reset' value='RESET' className='btn btn-secondary' />
@@ -146,4 +117,14 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);

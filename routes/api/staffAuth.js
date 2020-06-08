@@ -6,25 +6,7 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
-const Customer = require('../../models/Customer');
 const Employee = require('../../models/Employee');
-
-// @route   POST api/auth
-// @desc    authenticate registered user
-// @access  Public
-router.get('/', auth, async (req, res) => {
-  try {
-    const customer = await Customer.findById(req.customer.id).select(
-      '-password'
-    );
-
-    res.json(customer);
-    //res.json(employee);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error!');
-  }
-});
 
 // @route   POST api/auth
 // @desc    Authenticate user & get token
@@ -44,7 +26,6 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      //let user = await Customer.findOne({ email });
       let user = await Employee.findOne({ email });
 
       if (!user) {
