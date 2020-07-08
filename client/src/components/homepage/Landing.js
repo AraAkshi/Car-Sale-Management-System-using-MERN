@@ -16,14 +16,16 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section className='searchBar'>
+      <section className='container'>
         <form>
-          <input
-            className='p-content'
-            list='allVehicles'
-            type='text'
-            placeholder='Search On Sale Vehicles'
-          />
+          <div className='form-group'>
+            <input
+              className='p-content'
+              list='allVehicles'
+              type='text'
+              placeholder='Search On Sale Vehicles'
+            />
+          </div>
           <button className='btn btn-primary'>Search</button>
         </form>
       </section>

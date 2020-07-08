@@ -17,10 +17,7 @@ const PaymentSchema = new mongoose.Schema({
   },
   paymentBreakdown: [
     {
-      paymentMethod: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'paymentMethods',
-      },
+      paymentMethod: { type: String },
       paymentAmount: { type: String },
       paidDate: { type: Date },
     },

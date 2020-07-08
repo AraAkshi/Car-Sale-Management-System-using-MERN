@@ -16,20 +16,17 @@ const VehicleScheme = new mongoose.Schema({
     required: true,
     uppercase: true,
   },
-  status: {
+  condition: {
     type: String,
-    required: true,
     uppercase: true,
   },
   chassisNo: {
     type: String,
-    required: true,
     unique: true,
     uppercase: true,
   },
   engineNo: {
     type: String,
-    required: true,
     unique: true,
     uppercase: true,
   },
@@ -44,7 +41,10 @@ const VehicleScheme = new mongoose.Schema({
   },
   mileage: {
     type: Number,
-    required: true,
+  },
+  fuelType: {
+    type: String,
+    uppercase: true,
   },
   originCountry: {
     type: String,
@@ -74,6 +74,20 @@ const VehicleScheme = new mongoose.Schema({
       default: false,
     },
   },
+  lastServiceDate: {
+    type: Date,
+  },
+  noOfServicesDone: {
+    type: Number,
+  },
+  insurance: {
+    type: { type: String, uppercase: true },
+    company: { type: String, uppercase: true },
+    date: { type: String },
+  },
+  price: {
+    type: String,
+  },
   images: {
     type: [String],
   },
@@ -84,6 +98,9 @@ const VehicleScheme = new mongoose.Schema({
   sold: {
     type: Boolean,
     default: false,
+  },
+  soldDate: {
+    type: Date,
   },
   isInInventory: {
     type: Boolean,

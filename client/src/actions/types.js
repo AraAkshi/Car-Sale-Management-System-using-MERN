@@ -7,3 +7,6 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const USER_LOADED = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
+export const GET_VEHICLE = 'GET_VEHICLE';
+export const GET_VEHICLES = 'GET_VEHICLES';
+export const VEHICLE_ERROR = 'VEHICLE_ERROR';

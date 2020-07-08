@@ -53,8 +53,8 @@ const Login = ({ clientLogin, isAuthenticated }) => {
             minLength='6'
           />
         </div>
-        <input type='button' value='CANCEL' class='btn btn-secondary' />
-        <input type='submit' value='LOGIN' class='btn btn-primary' />
+        <input type='button' value='CANCEL' className='btn btn-secondary' />
+        <input type='submit' value='LOGIN' className='btn btn-primary' />
       </form>
       <p className='my-1'>
         Don't have an Account? <Link to='/register'> Sign Up </Link>

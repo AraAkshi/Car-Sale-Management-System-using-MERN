@@ -9,11 +9,9 @@ const CustomerSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  address: {
-    houseNo: { type: String },
-    streetName: { type: String },
-    city: { type: String },
-  },
+  houseNo: { type: String },
+  streetName: { type: String },
+  city: { type: String },
   contact: {
     type: Number,
   },

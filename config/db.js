@@ -5,7 +5,7 @@ const config = require('config');
 const express = require('express');
 const db = config.get('mongoURI'); //DB config (can get whatever is in the config file)
 
-const router = require('../dashboard');
+const router = require('../dashboard/dashboard');
 
 const app = express();
 

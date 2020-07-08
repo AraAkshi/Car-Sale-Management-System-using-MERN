@@ -9,13 +9,24 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    address: '',
+    houseNo: '',
+    streetName: '',
+    city: '',
     contact: '',
     password: '',
     password2: '',
   });
 
-  const { name, email, address, contact, password, password2 } = formData;
+  const {
+    name,
+    email,
+    houseNo,
+    streetName,
+    city,
+    contact,
+    password,
+    password2,
+  } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,7 +37,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      register({ name, email, address, contact, password });
+      register({ name, email, houseNo, streetName, city, contact, password });
     }
   };
 
@@ -64,12 +75,31 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             required
           />
         </div>
+        <h className='form-text'>Address</h>
         <div className='form-group'>
           <input
             type='text'
-            placeholder='Address'
-            name='address'
-            value={address}
+            placeholder='HouseNo'
+            name='houseNo'
+            value={houseNo}
+            onChange={e => onChange(e)}
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            type='text'
+            placeholder='StreetName'
+            name='streetName'
+            value={streetName}
+            onChange={e => onChange(e)}
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            type='text'
+            placeholder='City'
+            name='city'
+            value={city}
             onChange={e => onChange(e)}
           />
         </div>
@@ -93,8 +123,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             required
           />
           <small className='form-text'>
-            Please enter a password of minimum length of 6 characters including
-            at least one uppercase character and a number
+            Please enter a password of minimum length of 6 characters
           </small>
         </div>
         <div className='form-group'>

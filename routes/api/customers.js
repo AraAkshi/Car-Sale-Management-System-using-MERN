@@ -13,7 +13,6 @@ const Customer = require('../../models/Customer');
 router.post(
   '/',
   [
-    //check('nic', 'Please enter a valid NIC number').isLength({ min: 10 }),
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
@@ -27,7 +26,15 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, address, contact, password } = req.body;
+    const {
+      name,
+      email,
+      houseNo,
+      streetName,
+      city,
+      contact,
+      password,
+    } = req.body;
 
     //Check if user already exists
     try {
@@ -42,7 +49,9 @@ router.post(
       customer = new Customer({
         name,
         email,
-        address,
+        houseNo,
+        streetName,
+        city,
         contact,
         password,
       });

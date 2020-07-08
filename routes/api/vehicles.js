@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const multer = require('multer');
+const path = require('path');
+//const multer = require('multer');
 const { check, validationResult } = require('express-validator');
 
 const Vehicle = require('../../models/Vehicle');
@@ -12,15 +13,10 @@ const Vehicle = require('../../models/Vehicle');
 router.post(
   '/',
   [
-    auth,
     [
       check('model', 'Model is required').not().isEmpty(),
       check('make', 'Make is required').not().isEmpty(),
       check('manufactureYear', 'Manufacture Year is required').not().isEmpty(),
-      check('mileage', 'Mileage is required').not().isEmpty(),
-      check('status', 'Vehicle status is required').not().isEmpty(),
-      check('chassisNo', 'Chassis Number is required').not().isEmpty(),
-      check('engineNo', 'Engine Number is required').not().isEmpty(),
       check('color', 'Vehicle Color is required').not().isEmpty(),
     ],
   ],
@@ -34,42 +30,51 @@ router.post(
       vehicleRegNo,
       model,
       make,
-      status,
+      condition,
       chassisNo,
       engineNo,
       color,
       gear,
       mileage,
+      fuelType,
       originCountry,
       manufactureYear,
       seatingCapacity,
       cylinderCapacity,
       registeredDate,
-      owner,
-      images,
       specialNotes,
+      images,
+      price,
     } = req.body;
 
     const vehicleFields = {};
+    vehicleFields.owner = {};
+
+    try {
+      vehicleFields.owner.customer = req.customer.id;
+    } catch {
+      vehicleFields.owner.customer = null;
+    }
+    vehicleFields.isInInventory = true;
+
     if (vehicleRegNo) vehicleFields.vehicleRegNo = vehicleRegNo;
     if (model) vehicleFields.model = model;
     if (make) vehicleFields.make = make;
-    if (status) vehicleFields.status = status;
+    if (condition) vehicleFields.condition = condition;
     if (chassisNo) vehicleFields.chassisNo = chassisNo;
     if (engineNo) vehicleFields.engineNo = engineNo;
     if (color) vehicleFields.color = color;
     if (gear) vehicleFields.gear = gear;
     if (mileage) vehicleFields.mileage = mileage;
+    if (fuelType) vehicleFields.fuelType = fuelType;
     if (originCountry) vehicleFields.originCountry = originCountry;
     if (manufactureYear) vehicleFields.manufactureYear = manufactureYear;
     if (seatingCapacity) vehicleFields.seatingCapacity = seatingCapacity;
     if (cylinderCapacity) vehicleFields.cylinderCapacity = cylinderCapacity;
     if (registeredDate) vehicleFields.registeredDate = registeredDate;
-    if (owner) vehicleFields.owner = owner;
-    if (images) {
-      vehicleFields.images = images.split(',');
-    }
+    if (price) vehicleFields.price = price;
     if (specialNotes) vehicleFields.specialNotes = specialNotes;
+    if (images) vehicleFields.images = images;
 
     try {
       let vehicle = await Vehicle.findOne({ _id: req.params.vehicle_id });
@@ -84,12 +89,13 @@ router.post(
         return res.json(vehicle);
       }
 
-      //Create profile
+      //Create record
       vehicle = new Vehicle(vehicleFields);
       await vehicle.save();
 
       res.json(vehicle);
     } catch (err) {
+      console.log(vehicleFields);
       console.error(err.message);
       res.status(500).send('Server error');
     }
@@ -101,7 +107,25 @@ router.post(
 // @access  public
 router.get('/', async (req, res) => {
   try {
-    const vehicles = await Vehicle.find();
+    const vehicles = await Vehicle.find(
+      { isInventory: true, sold: false },
+      {
+        _id: 1,
+        vehicleRegNo: 1,
+        model: 1,
+        make: 1,
+        condition: 1,
+        color: 1,
+        gear: 1,
+        mileage: 1,
+        fuelType: 1,
+        originCountry: 1,
+        manufactureYear: 1,
+        price: 1,
+        images: 1,
+        specialNotes: 1,
+      }
+    ).populate('owner', ['name', 'contact']);
 
     res.json(vehicles);
   } catch (err) {
@@ -115,7 +139,28 @@ router.get('/', async (req, res) => {
 // @access  public
 router.get('/:vehicle_id', async (req, res) => {
   try {
-    const vehicle = await Vehicle.findOne({ _id: req.params.vehicle_id });
+    const vehicle = await Vehicle.findOne(
+      {
+        _id: req.params.vehicle_id,
+        isInventory: true,
+        sold: false,
+      },
+      {
+        vehicleRegNo: 1,
+        model: 1,
+        make: 1,
+        condition: 1,
+        color: 1,
+        gear: 1,
+        mileage: 1,
+        fuelType: 1,
+        originCountry: 1,
+        manufactureYear: 1,
+        price: 1,
+        images: 1,
+        specialNotes: 1,
+      }
+    ).populate('customers', ['name', 'contact']);
     console.log(vehicle);
     if (!vehicle) {
       return res.status(400).json({ msg: 'Vehicle Not Found' });
