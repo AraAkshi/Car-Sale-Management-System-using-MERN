@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../../middleware/auth');
+const checkObjectId = require('../../middleware/checkObjectId');
 const { check, validationResult } = require('express-validator');
 
 const Employee = require('../../models/Employee');
@@ -76,5 +78,54 @@ router.post(
     }
   }
 );
+
+// @route    GET api/employees/:user_id
+// @desc     Get employee by user ID
+// @access   Public
+router.get(
+  '/:user_id',
+  checkObjectId('user_id'),
+  async ({ params: { user_id } }, res) => {
+    try {
+      const employee = await Employee.findOne({
+        _id: user_id,
+      });
+
+      if (!employee) return res.status(400).json({ msg: 'Employee not found' });
+
+      return res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({ msg: 'Server error' });
+    }
+  }
+);
+
+// @route    GET api/employees
+// @desc     Get all employees
+// @access   Public
+router.get('/', async (req, res) => {
+  try {
+    const employees = await Employee.find();
+    res.json(employees);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    DELETE api/employee
+// @desc     Delete user
+// @access   Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    //Remove User
+    await Employee.findOneAndRemove({ _id: req.user.id });
+    res.json({ msg: 'User deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

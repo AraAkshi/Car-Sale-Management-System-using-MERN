@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const AppointmentSchema = new mongoose.Schema({
   customer: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'customers',
   },
   scheduleDate: {
     type: Date,
@@ -11,6 +12,9 @@ const AppointmentSchema = new mongoose.Schema({
   scheduleTime: {
     type: String,
     required: true,
+  },
+  specialNotes: {
+    type: String,
   },
   vehicle: {
     type: mongoose.Schema.Types.ObjectId,

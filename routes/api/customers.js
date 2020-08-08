@@ -60,7 +60,7 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       customer.password = await bcrypt.hash(password, salt);
 
-      await customer.save(); //save user in the db
+      await customer.save();
 
       //Return JWT
       const payload = {

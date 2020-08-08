@@ -55,10 +55,7 @@ const Navbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
             <Link to='/sell-vehicle'>SELL VEHICLES</Link>
           </li>
           <li>
-            <Link to='/about'>ABOUT</Link>
-          </li>
-          <li>
-            <Link to='/contactUs'>CONTACT US</Link>
+            <Link to='/contact-us'>CONTACT US</Link>
           </li>
         </ul>
       </nav>

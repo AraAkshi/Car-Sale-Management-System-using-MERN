@@ -68,32 +68,35 @@ const dashboardOptions = new AdminBro({
           },
           condition: {
             availableValues: [
-              { value: 'unregBrandNew', label: 'UNREGISTERED BRAND NEW' },
-              { value: 'regBrandNew', label: 'REGISTERED BRAND NEW' },
-              { value: 'reconditioned', label: 'RECONDITIONED' },
+              {
+                value: 'UNREGISTERED BRAND NEW',
+                label: 'UNREGISTERED BRAND NEW',
+              },
+              { value: 'REGISTERED BRAND NEW', label: 'REGISTERED BRAND NEW' },
+              { value: 'RECONDITIONED', label: 'RECONDITIONED' },
             ],
           },
           gear: {
             label: 'Transmission Gear',
             availableValues: [
-              { value: 'auto', label: 'AUTO' },
-              { value: 'manual', label: 'MANUAL' },
-              { value: 'tiptronic', label: 'TIPTRONIC' },
+              { value: 'AUTO', label: 'AUTO' },
+              { value: 'MANUAL', label: 'MANUAL' },
+              { value: 'TIPTRONIC', label: 'TIPTRONIC' },
             ],
           },
           fuelType: {
             label: 'Fuel Type',
             availableValues: [
-              { value: 'diesel', label: 'DIESEL' },
-              { value: 'electric', label: 'ELECTRIC' },
-              { value: 'petrol', label: 'PETROL' },
-              { value: 'dieselHybrid', label: 'DIESEL-HYBRID' },
-              { value: 'petrolHybrid', label: 'PETROL-HYBRID' },
-              { value: 'pluginHybrid', label: 'PLUGIN-HYBRID' },
+              { value: 'DIESEL', label: 'DIESEL' },
+              { value: 'ELECTRIC', label: 'ELECTRIC' },
+              { value: 'PETROL', label: 'PETROL' },
+              { value: 'DIESEL-HYBRID', label: 'DIESEL-HYBRID' },
+              { value: 'PETROL-HYBRID', label: 'PETROL-HYBRID' },
+              { value: 'PLUGIN-HYBRID', label: 'PLUGIN-HYBRID' },
             ],
           },
           images: {
-            components: AdminBro.bundle('./fileUpload'),
+            // components: AdminBro.bundle('./fileUpload'),
           },
         },
         listProperties: [

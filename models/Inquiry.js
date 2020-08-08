@@ -1,18 +1,24 @@
 const mongoose = require('mongoose');
 
 const InquirySchema = new mongoose.Schema({
-  customerName: {
+  name: {
     type: String,
     required: true,
   },
-  customerContact: {
+  contact: {
     type: Number,
     required: true,
   },
-  customerEmail: {
+  email: {
     type: String,
   },
-  inquiredAbout: {
+  make: {
+    type: String,
+  },
+  model: {
+    type: String,
+  },
+  specialNotes: {
     type: String,
   },
   isAttended: {

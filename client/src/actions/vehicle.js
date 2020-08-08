@@ -12,7 +12,7 @@ export const addVehicle = (
   try {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
     };
 
@@ -42,6 +42,23 @@ export const addVehicle = (
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
     }
 
+    dispatch({
+      type: VEHICLE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get Logged User Vehicles
+export const getVehicleByUserId = () => async dispatch => {
+  try {
+    const res = await axios.get(`/api/vehicles/my-vehicles`);
+
+    dispatch({
+      type: GET_VEHICLES,
+      payload: res.data,
+    });
+  } catch (err) {
     dispatch({
       type: VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },

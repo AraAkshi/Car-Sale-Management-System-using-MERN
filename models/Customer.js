@@ -22,6 +22,18 @@ const CustomerSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  // myVehicles: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'vehicles',
+  // },
+  // myAppointments: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'appointments',
+  // },
+  // myOffers: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'offers',
+  // },
 });
 
 module.exports = Customer = mongoose.model('customers', CustomerSchema);

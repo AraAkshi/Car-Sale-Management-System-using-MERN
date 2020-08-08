@@ -64,15 +64,8 @@ const VehicleScheme = new mongoose.Schema({
     type: Date,
   },
   owner: {
-    customer: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'customers',
-      default: null,
-    },
-    company: {
-      type: Boolean,
-      default: false,
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'customers',
   },
   lastServiceDate: {
     type: Date,

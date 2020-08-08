@@ -4,6 +4,7 @@
     "NADEESHANS",
     "expressjs",
     "ishak",
+    "originalname",
     "tiptronic",
     "unreg"
   ],
@@ -12,5 +13,11 @@
     "extension",
     "mern",
     "redux"
-  ]
+  ],
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  }
 }

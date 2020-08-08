@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-//Create Schema
 const EmployeeSchema = new mongoose.Schema({
   nic: {
     type: String,

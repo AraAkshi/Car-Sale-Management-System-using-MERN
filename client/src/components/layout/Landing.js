@@ -1,9 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import Navbar from './Navbar';
 
 const Landing = () => {
   return (
-    <div className='parent'>
+    <Fragment>
+      <Navbar />
       <section className='jumbatron'>
         <div className='dark-overlay'>
           <div className='jumbatron-text'>
@@ -16,20 +17,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section className='container'>
-        <form>
-          <div className='form-group'>
-            <input
-              className='p-content'
-              list='allVehicles'
-              type='text'
-              placeholder='Search On Sale Vehicles'
-            />
-          </div>
-          <button className='btn btn-primary'>Search</button>
-        </form>
-      </section>
-    </div>
+    </Fragment>
   );
 };
 

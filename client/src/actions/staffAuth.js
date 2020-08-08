@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alerts';
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   USER_LOADED,
@@ -49,7 +47,7 @@ export const staffLogin = (email, password) => async dispatch => {
       payload: res.data,
     });
 
-    dispatch(loadUser());
+    //dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 

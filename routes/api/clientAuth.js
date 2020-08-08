@@ -8,9 +8,9 @@ const auth = require('../../middleware/auth');
 
 const Customer = require('../../models/Customer');
 
-// @route   POST api/auth
+// @route   GET api/auth
 // @desc    authenticate registered client
-// @access  Public
+// @access  Private
 router.get('/', auth, async (req, res) => {
   try {
     const customer = await Customer.findById(req.customer.id).select(
