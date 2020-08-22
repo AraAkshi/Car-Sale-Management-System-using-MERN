@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const DirectCustomerSchema = new mongoose.Schema({
+  vehicle: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'salevehicles',
+  },
   nic: {
     type: String,
     unique: true,
@@ -13,11 +17,9 @@ const DirectCustomerSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  address: {
-    houseNo: { type: String },
-    streetName: { type: String },
-    city: { type: String },
-  },
+  houseNo: { type: String },
+  streetName: { type: String },
+  city: { type: String },
   contact: {
     type: Number,
   },
@@ -31,6 +33,6 @@ const DirectCustomerSchema = new mongoose.Schema({
 });
 
 module.exports = DirectCustomer = mongoose.model(
-  'directCustomers',
+  'directcustomers',
   DirectCustomerSchema
 );

@@ -4,7 +4,7 @@ const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
 const Offer = require('../../models/Offer');
-const Customer = require('../../models/Customer');
+const Customer = require('../../models/OnlineCustomer');
 
 // @route   POST api/offers/:vehicle_id
 // @desc    Create/Update offers

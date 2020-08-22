@@ -1,5 +1,6 @@
 import {
   GET_APPOINTMENT,
+  DELETE_APPOINTMENT,
   APPOINTMENT_ERROR,
   GET_APPOINTMENTS,
 } from '../actions/types';
@@ -31,6 +32,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false,
+      };
+    case DELETE_APPOINTMENT:
+      return {
+        ...state,
         loading: false,
       };
     default:

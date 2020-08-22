@@ -7,23 +7,23 @@ const Dashboard = props => {
   return (
     <Fragment>
       <SideNavbar />
-      <section class='sidebar-container'>
+      <section className='sidebar-container'>
         <Alerts />
         <div className='dashboard-header'>
           <h1 className='large'>Welcome to Nadeeshans</h1>
         </div>
         <div className='dashboard-notification'>
           <div className='dashboard-notification-widget'>
-            <Link to='appointments'>APPOINTMENTS</Link>
+            <Link to='/appointments'>APPOINTMENTS</Link>
           </div>
           <div className='dashboard-notification-widget'>
-            <Link to='inquiries'>INQUIRIES</Link>
+            <Link to='/inquiries'>INQUIRIES</Link>
           </div>
           <div className='dashboard-notification-widget'>
-            <Link to='offers'>OFFERS</Link>
+            <Link to='/offers'>OFFERS</Link>
           </div>
           <div className='dashboard-notification-widget'>
-            <Link to='renewals'>RENEWALS</Link>
+            <Link to='/renewals'>RENEWALS</Link>
           </div>
         </div>
       </section>

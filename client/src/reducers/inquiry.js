@@ -1,4 +1,9 @@
-import { GET_INQUIRY, INQUIRY_ERROR, GET_INQUIRIES } from '../actions/types';
+import {
+  GET_INQUIRY,
+  INQUIRY_ERROR,
+  GET_INQUIRIES,
+  DELETE_INQUIRY,
+} from '../actions/types';
 
 const initialState = {
   inquiry: null,
@@ -14,19 +19,24 @@ export default function (state = initialState, action) {
     case GET_INQUIRY:
       return {
         ...state,
-        appointment: payload,
+        inquiry: payload,
         loading: false,
       };
     case GET_INQUIRIES:
       return {
         ...state,
-        appointments: payload,
+        inquiries: payload,
         loading: false,
       };
     case INQUIRY_ERROR:
       return {
         ...state,
         error: payload,
+        loading: false,
+      };
+    case DELETE_INQUIRY:
+      return {
+        ...state,
         loading: false,
       };
     default:

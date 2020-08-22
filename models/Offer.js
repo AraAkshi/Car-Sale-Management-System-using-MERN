@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const OfferSchema = new mongoose.Schema({
   customer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'customers',
+    ref: 'onlinecustomers',
   },
   amount: {
     type: Number,
@@ -18,7 +18,7 @@ const OfferSchema = new mongoose.Schema({
   },
   vehicle: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'vehicles',
+    ref: 'salevehicles',
   },
   enteredDate: {
     type: Date,

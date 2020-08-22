@@ -12,6 +12,7 @@
   "author": "Ishara Ishak",
   "license": "ISC",
   "dependencies": {
+    "@react-pdf/renderer": "^1.6.10",
     "admin-bro": "^2.4.2",
     "admin-bro-expressjs": "^2.0.5",
     "admin-bro-mongoose": "^0.5.2",

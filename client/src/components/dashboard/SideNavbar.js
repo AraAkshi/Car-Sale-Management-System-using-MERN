@@ -51,7 +51,10 @@ const SideNavbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
             <Link to='/dashboard'>DASHBOARD</Link>
           </li>
           <li>
-            <Link to='/inventory'>VEHICLES</Link>
+            <Link to='/sale-vehicles'>SALE VEHICLES</Link>
+          </li>
+          <li>
+            <Link to='/online-vehicles'>ONLINE VEHICLES</Link>
           </li>
           <li>
             <Link to='/inquiries'>INQUIRIES</Link>
@@ -63,7 +66,13 @@ const SideNavbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
             <Link to='/reports'>REPORTS</Link>
           </li>
           <li>
-            <Link to='/users'>USERS</Link>
+            <Link to='/sale-clients'>SALE CLIENTS</Link>
+          </li>
+          <li>
+            <Link to='/online-clients'>ONLINE CLIENTS</Link>
+          </li>
+          <li>
+            <Link to='/employees'>EMPLOYEES</Link>
           </li>
         </ul>
       </nav>

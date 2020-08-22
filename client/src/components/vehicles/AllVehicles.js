@@ -1,16 +1,41 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import VehicleItem from './VehicleItem';
-import { getVehicles } from '../../actions/vehicle';
+import VehicleItem from './SaleVehicleItem';
+import { getSaleVehicles } from '../../actions/saleVehicle';
 import Spinner from '../layout/Spinner';
 import Navbar from '../layout/Navbar';
 import Alerts from '../layout/Alerts';
 
-const AllVehicles = ({ getVehicles, vehicle: { vehicles, loading } }) => {
+const AllVehicles = ({
+  getSaleVehicles,
+  saleVehicle: { saleVehicles, loading },
+}) => {
   useEffect(() => {
-    getVehicles();
-  }, [getVehicles]);
+    getSaleVehicles();
+  }, [getSaleVehicles]);
+
+  const [word, setWord] = useState('');
+  const [filterDisplay, setFilterDisplay] = useState(saleVehicles);
+
+  const onChange = e => {
+    let oldList = saleVehicles.map(vehicle => {
+      return {
+        make: vehicle.make.toUpperCase(),
+        model: vehicle.model.toUpperCase(),
+      };
+    });
+
+    if (e !== '') {
+      let newList = oldList.filter(vehicle => {
+        vehicle.model.includes(word.toUpperCase());
+        vehicle.make.includes(word.toUpperCase());
+      });
+      setFilterDisplay(newList);
+    } else {
+      setFilterDisplay(saleVehicles);
+    }
+  };
 
   return (
     <Fragment>
@@ -26,30 +51,35 @@ const AllVehicles = ({ getVehicles, vehicle: { vehicles, loading } }) => {
                 <i className='fas fa-car'></i>On Sale Vehicles
               </h1>
               <div className='searchBar'>
-                <form>
-                  <div className='form-group'>
-                    <input
-                      type='text'
-                      name='allVehicles'
-                      id='allVehicles'
-                      placeholder='Search On Sale Vehicles'
-                    />
-                  </div>
-                  <input
-                    type='button'
-                    value='Search'
-                    className='btn btn-primary'
-                  />
-                </form>
+                <input
+                  type='text'
+                  name='allVehicles'
+                  id='allVehicles'
+                  onChange={e => onChange(e.target.value)}
+                  placeholder='Search On Sale Vehicles'
+                />
+                <input
+                  type='button'
+                  value='Search'
+                  className='btn btn-primary'
+                />
               </div>
               <div className='vehicles'>
-                {vehicles.length > 0 ? (
+                {filterDisplay.map((saleVehicle, x) => (
+                  <div key={x}>
+                    <VehicleItem
+                      key={saleVehicle._id}
+                      saleVehicle={saleVehicle}
+                    />
+                  </div>
+                ))}
+                {/* {vehicles.length > 0 ? (
                   vehicles.map(vehicle => (
                     <VehicleItem key={vehicle._id} vehicle={vehicle} />
                   ))
                 ) : (
                   <h5>No vehicles found</h5>
-                )}
+                )} */}
               </div>
             </Fragment>
           )}
@@ -60,12 +90,12 @@ const AllVehicles = ({ getVehicles, vehicle: { vehicles, loading } }) => {
 };
 
 AllVehicles.propTypes = {
-  getVehicles: PropTypes.func.isRequired,
-  vehicle: PropTypes.array.isRequired,
+  getSaleVehicles: PropTypes.func.isRequired,
+  saleVehicle: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({
-  vehicle: state.vehicle,
+  saleVehicle: state.saleVehicle,
 });
 
-export default connect(mapStateToProps, { getVehicles })(AllVehicles);
+export default connect(mapStateToProps, { getSaleVehicles })(AllVehicles);

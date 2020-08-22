@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addVehicle } from '../../actions/vehicle';
+import { addVehicle } from '../../actions/clientVehicle';
 import PropTypes from 'prop-types';
 import Navbar from '../layout/Navbar';
 import Alerts from '../layout/Alerts';
@@ -219,7 +219,7 @@ const AddVehicle = ({ addVehicle, history }) => {
           </div>
           <div className='form-group'>
             <input
-              type='text'
+              type='number'
               name='seatingCapacity'
               placeholder='Seating Capacity'
               value={seatingCapacity}

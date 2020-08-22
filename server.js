@@ -1,28 +1,27 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
-//const bodyParser = require('body-parser');
 const app = express();
 
 //Connect DB
 connectDB();
 
-app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb' }));
-
 //Init Middleware - enables body-parser which is default in express
 app.use(express.json({ extended: false })); //extended: false- allows us to use req object
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //Define Routes
-app.use('/api/customers', require('./routes/api/customers'));
+app.use('/api/customers', require('./routes/api/onlineCustomers'));
 app.use('/api/employees', require('./routes/api/employees'));
-app.use('/api/vehicles', require('./routes/api/vehicles'));
+app.use('/api/vehicles', require('./routes/api/onlineVehicles'));
 app.use('/api/appointments', require('./routes/api/appointments'));
 app.use('/api/inquiries', require('./routes/api/inquiries'));
 app.use('/api/offers', require('./routes/api/offers'));
-app.use('/api/profiles', require('./routes/api/profiles'));
+app.use('/api/profiles', require('./routes/api/clientProfiles'));
+app.use('/api/clientProfiles', require('./routes/api/saleClientProfiles'));
 app.use('/api/clientAuth', require('./routes/api/clientAuth'));
 app.use('/api/staffAuth', require('./routes/api/staffAuth'));
+app.use('/api/saleVehicles', require('./routes/api/saleVehicles'));
 
 const port = process.env.PORT || 5000;
 

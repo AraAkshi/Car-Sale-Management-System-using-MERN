@@ -48,9 +48,17 @@ const Navbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
           <li>
             <Link to='/'>HOME</Link>
           </li>
-          <li>
-            <Link to='/on-sale-vehicles'>ON SALE VEHICLES</Link>
-          </li>
+          <div className='dropdown'>
+            <li className='dropbtn'>
+              <Link to='#'>
+                VEHICLES <i className='fa fa-caret-down'></i>
+              </Link>
+            </li>
+            <div className='dropdown-content'>
+              <Link to='/on-sale-vehicles'>ON SALE VEHICLES</Link>
+              <Link to='/client-vehicles'>CLIENT VEHICLES</Link>
+            </div>
+          </div>
           <li>
             <Link to='/sell-vehicle'>SELL VEHICLES</Link>
           </li>

@@ -80,7 +80,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               required
             />
           </div>
-          <h className='form-text'>Address</h>
+          <h4 className='form-text'>Address</h4>
           <div className='form-group'>
             <input
               type='text'

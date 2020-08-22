@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const AppointmentSchema = new mongoose.Schema({
   customer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'customers',
+    ref: 'onlinecustomers',
   },
   scheduleDate: {
-    type: Date,
+    type: String,
     required: true,
   },
   scheduleTime: {
@@ -18,7 +18,7 @@ const AppointmentSchema = new mongoose.Schema({
   },
   vehicle: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'vehicles',
+    ref: 'salevehicles',
   },
   isAttended: {
     type: Boolean,
@@ -27,6 +27,12 @@ const AppointmentSchema = new mongoose.Schema({
   enteredDate: {
     type: Date,
     default: Date.now,
+  },
+  name: {
+    type: String,
+  },
+  contact: {
+    type: String,
   },
 });
 
