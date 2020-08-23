@@ -6,7 +6,7 @@ import SideNavbar from '../SideNavbar';
 import PropTypes from 'prop-types';
 import Alerts from '../../layout/Alerts';
 
-const AddDirectClient = ({ addClientProfile, history }) => {
+const AddDirectClient = ({ addClientProfile, history, match: { params } }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,8 +34,8 @@ const AddDirectClient = ({ addClientProfile, history }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    //const vehicle_id = params.vehicle_id;
-    addClientProfile(formData, history);
+    const vehicle_id = params.vehicle_id;
+    addClientProfile(formData, vehicle_id, history);
   };
 
   return (
@@ -44,7 +44,7 @@ const AddDirectClient = ({ addClientProfile, history }) => {
       <section className='sidebar-container'>
         <Alerts />
         <p className='large'>
-          <i className='fas fa-user'></i>Enter Customer Details
+          <i className='fas fa-user'></i>Edit Customer Details
         </p>
         <form className='form' onSubmit={e => onSubmit(e)}>
           <div className='form-group'>
@@ -139,7 +139,7 @@ const AddDirectClient = ({ addClientProfile, history }) => {
             </select>
           </div>
 
-          <Link to='/sale-vehicles' className='btn btn-secondary'>
+          <Link to='/sale-clients' className='btn btn-secondary'>
             BACK
           </Link>
           <input type='submit' value='CONFIRM' className='btn btn-primary' />

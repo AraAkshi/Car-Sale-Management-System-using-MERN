@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const DirectCustomerSchema = new mongoose.Schema({
-  vehicle: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'salevehicles',
-  },
+  // vehicle: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'salevehicles',
+  // },
   nic: {
     type: String,
     unique: true,

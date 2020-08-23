@@ -63,7 +63,7 @@ const EditInquiry = ({
       <section className='sidebar-container'>
         <Alerts />
         <Fragment>
-          {loading ? (
+          {inquiry === null || loading ? (
             <Spinner />
           ) : (
             <Fragment>

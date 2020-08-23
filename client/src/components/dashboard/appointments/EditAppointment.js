@@ -9,6 +9,7 @@ import {
 } from '../../../actions/appointment';
 import Alerts from '../../layout/Alerts';
 import SideNavbar from '../SideNavbar';
+import Spinner from '../../layout/Spinner';
 
 const EditAppointment = ({
   appointment: { appointment, loading },
@@ -64,81 +65,89 @@ const EditAppointment = ({
       <SideNavbar />
       <section className='sidebar-container'>
         <Alerts />
-        <p className='large'>Edit Appointment Details</p>
-        <form className='form' onSubmit={e => onSubmit(e)}>
-          <div className='form-group'>
-            <select
-              className='form-dashboard'
-              name='isAttended'
-              value={isAttended}
-              onChange={e => onChange(e)}
-            >
-              <option value='false'>NOT ATTENDED</option>
-              <option value='true'>ATTENDED</option>
-            </select>
-          </div>
-          <div className='form-group'>
-            <input
-              type='text'
-              className='form-dashboard'
-              name='name'
-              value={name}
-              onChange={e => onChange(e)}
-              placeholder='Enter Customer Name'
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='text'
-              name='contact'
-              className='form-dashboard'
-              value={contact}
-              placeholder='Enter Customer Contact Number'
-              onChange={e => onChange(e)}
-            />
-          </div>
-          <div className='form-group'>
-            <label>Choose an Appointment Date</label>
-            <input
-              type='date'
-              name='scheduleDate'
-              className='form-dashboard'
-              value={scheduleDate}
-              onChange={e => onChange(e)}
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <label>Choose an Appointment Time</label>
-            <input
-              type='time'
-              name='scheduleTime'
-              className='form-dashboard'
-              placeholder='Appointment Time'
-              value={scheduleTime}
-              onChange={e => onChange(e)}
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='text'
-              name='specialNotes'
-              className='form-dashboard'
-              placeholder='Mention any Special Notes if any'
-              value={specialNotes}
-              onChange={e => onChange(e)}
-            />
-          </div>
-          <Link to={`/appointments`} className='btn btn-secondary'>
-            CANCEL
-          </Link>
-          <input
-            type='submit'
-            value='UPDATE APPOINTMENT'
-            className='btn btn-success'
-          />
-        </form>
+        <Fragment>
+          {appointment === null || loading ? (
+            <Spinner />
+          ) : (
+            <Fragment>
+              <p className='large'>Edit Appointment Details</p>
+              <form className='form' onSubmit={e => onSubmit(e)}>
+                <div className='form-group'>
+                  <select
+                    className='form-dashboard'
+                    name='isAttended'
+                    value={isAttended}
+                    onChange={e => onChange(e)}
+                  >
+                    <option value='false'>NOT ATTENDED</option>
+                    <option value='true'>ATTENDED</option>
+                  </select>
+                </div>
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    className='form-dashboard'
+                    name='name'
+                    value={name}
+                    onChange={e => onChange(e)}
+                    placeholder='Enter Customer Name'
+                  />
+                </div>
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    name='contact'
+                    className='form-dashboard'
+                    value={contact}
+                    placeholder='Enter Customer Contact Number'
+                    onChange={e => onChange(e)}
+                  />
+                </div>
+                <div className='form-group'>
+                  <label>Choose an Appointment Date</label>
+                  <input
+                    type='date'
+                    name='scheduleDate'
+                    className='form-dashboard'
+                    value={scheduleDate}
+                    onChange={e => onChange(e)}
+                    required
+                  />
+                </div>
+                <div className='form-group'>
+                  <label>Choose an Appointment Time</label>
+                  <input
+                    type='time'
+                    name='scheduleTime'
+                    className='form-dashboard'
+                    placeholder='Appointment Time'
+                    value={scheduleTime}
+                    onChange={e => onChange(e)}
+                    required
+                  />
+                </div>
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    name='specialNotes'
+                    className='form-dashboard'
+                    placeholder='Mention any Special Notes if any'
+                    value={specialNotes}
+                    onChange={e => onChange(e)}
+                  />
+                </div>
+                <Link to={`/appointments`} className='btn btn-secondary'>
+                  CANCEL
+                </Link>
+                <input
+                  type='submit'
+                  value='UPDATE APPOINTMENT'
+                  className='btn btn-success'
+                />
+              </form>
+            </Fragment>
+          )}
+        </Fragment>
       </section>
     </Fragment>
   );

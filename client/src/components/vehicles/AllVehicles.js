@@ -50,20 +50,16 @@ const AllVehicles = ({
               <h1 className='large text-primary'>
                 <i className='fas fa-car'></i>On Sale Vehicles
               </h1>
-              <div className='searchBar'>
-                <input
-                  type='text'
-                  name='allVehicles'
-                  id='allVehicles'
-                  onChange={e => onChange(e.target.value)}
-                  placeholder='Search On Sale Vehicles'
-                />
-                <input
-                  type='button'
-                  value='Search'
-                  className='btn btn-primary'
-                />
-              </div>
+              <form className='form'>
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    className='form-dashboard'
+                    onChange={e => onChange(e.target.value)}
+                    placeholder='Search On Sale Vehicles'
+                  />
+                </div>
+              </form>
               <div className='vehicles'>
                 {filterDisplay.map((saleVehicle, x) => (
                   <div key={x}>

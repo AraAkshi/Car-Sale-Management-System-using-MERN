@@ -39,6 +39,7 @@ export const addVehicle = (formData, history) => async dispatch => {
     });
   }
 };
+
 //Update Online Vehicles
 export const updateVehicle = (
   formData,
@@ -80,9 +81,26 @@ export const updateVehicle = (
 };
 
 //Get Logged User Vehicles
-export const getVehicleByUserId = () => async dispatch => {
+export const getVehicleByLoggedUserId = () => async dispatch => {
   try {
     const res = await axios.get(`/api/vehicles/my-vehicles`);
+
+    dispatch({
+      type: GET_CLIENT_VEHICLES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: VEHICLE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get a User's Vehicles
+export const getVehicleByUserId = client_id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/vehicles/${client_id}`);
 
     dispatch({
       type: GET_CLIENT_VEHICLES,

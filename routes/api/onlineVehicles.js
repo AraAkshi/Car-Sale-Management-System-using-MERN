@@ -10,10 +10,7 @@ const Customer = require('../../models/OnlineCustomer');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(
-      null,
-      'D:/ISH/MIT/MIT Project/Development Project/Car_sale_mgt_system/uploads'
-    );
+    cb(null, './uploads');
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -65,7 +62,8 @@ router.post(
 
     const vehicleFields = {};
 
-    vehicleFields.owner = req.user.id;
+    userId = req.user.id;
+    vehicleFields.owner = userId;
     vehicleFields.isInInventory = true;
 
     if (vehicleRegNo) vehicleFields.vehicleRegNo = vehicleRegNo;
@@ -202,6 +200,45 @@ router.get('/my-vehicles', auth, async (req, res) => {
     const vehicle = await Vehicle.find(
       {
         owner: userId,
+      },
+      {
+        vehicleRegNo: 1,
+        model: 1,
+        make: 1,
+        condition: 1,
+        color: 1,
+        gear: 1,
+        mileage: 1,
+        fuelType: 1,
+        originCountry: 1,
+        manufactureYear: 1,
+        price: 1,
+        images: 1,
+        specialNotes: 1,
+      }
+    );
+    if (!vehicle) {
+      return res.status(400).json({ msg: 'You have not added any Vehicles' });
+    }
+
+    res.json(vehicle);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Vehicles Not Found' });
+    }
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   GET api/vehicles/:client_id
+// @desc    View a selected vehicle
+// @access  private
+router.get('/my-vehicles', auth, async (req, res) => {
+  try {
+    const vehicle = await Vehicle.find(
+      {
+        owner: req.params.client_id,
       },
       {
         vehicleRegNo: 1,

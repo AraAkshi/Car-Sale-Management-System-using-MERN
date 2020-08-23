@@ -117,24 +117,20 @@ const ViewVehicle = ({
                       </td>
                     </tr>
                     <tr>
-                      <td colSpan='2' class='table-content-price'>
+                      <td class='table-content-header'>Price</td>
+                      <td class='table-content-price'>
                         {clientVehicle.price} LKR
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class='table-content-header'>Contact</td>
+                      <td>
+                        {clientVehicle.owner.name} :{' '}
+                        {clientVehicle.owner.contact}
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                <Link
-                  to={`/reserve-vehicle/${clientVehicle._id}`}
-                  className='btn btn-primary'
-                >
-                  RESERVE
-                </Link>
-                <Link
-                  to={`/make-offer/${clientVehicle._id}`}
-                  className='btn btn-primary'
-                >
-                  MAKE OFFER
-                </Link>
                 <Link to='/on-sale-vehicles' className='btn btn-secondary'>
                   Go Back
                 </Link>

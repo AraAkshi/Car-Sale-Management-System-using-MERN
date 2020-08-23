@@ -2,12 +2,14 @@ import {
   GET_SALE_VEHICLE,
   VEHICLE_ERROR,
   GET_SALE_VEHICLES,
+  GET_SOLD_VEHICLES,
   DELETE_SALE_VEHICLE,
 } from '../actions/types';
 
 const initialState = {
   saleVehicle: null,
   saleVehicles: [],
+  soldVehicles: [],
   loading: true,
   error: {},
 };
@@ -28,6 +30,12 @@ export default function (state = initialState, action) {
         saleVehicles: payload,
         loading: false,
       };
+    case GET_SOLD_VEHICLES:
+      return {
+        ...state,
+        soldVehicles: payload,
+        loading: false,
+      };
     case VEHICLE_ERROR:
       return {
         ...state,
@@ -37,6 +45,7 @@ export default function (state = initialState, action) {
     case DELETE_SALE_VEHICLE:
       return {
         ...state,
+        saleVehicle: null,
         loading: false,
       };
     default:

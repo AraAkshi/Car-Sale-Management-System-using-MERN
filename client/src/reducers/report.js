@@ -1,13 +1,13 @@
 import {
-  GET_INQUIRY,
-  INQUIRY_ERROR,
-  GET_INQUIRIES,
-  DELETE_INQUIRY,
+  GET_REPORT,
+  REPORT_ERRORS,
+  GET_REPORTS,
+  DELETE_REPORT,
 } from '../actions/types';
 
 const initialState = {
-  inquiry: null,
-  inquiries: [],
+  report: null,
+  reports: [],
   loading: true,
   error: {},
 };
@@ -16,28 +16,28 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_INQUIRY:
+    case GET_REPORT:
       return {
         ...state,
-        inquiry: payload,
+        report: payload,
         loading: false,
       };
-    case GET_INQUIRIES:
+    case GET_REPORTS:
       return {
         ...state,
-        inquiries: payload,
+        reports: payload,
         loading: false,
       };
-    case INQUIRY_ERROR:
+    case REPORT_ERRORS:
       return {
         ...state,
         error: payload,
         loading: false,
       };
-    case DELETE_INQUIRY:
+    case DELETE_REPORT:
       return {
         ...state,
-        inquiry: null,
+        report: null,
         loading: false,
       };
     default:

@@ -7,7 +7,10 @@ import Alerts from '../../layout/Alerts';
 import { getProfiles } from '../../../actions/profile';
 import Spinner from '../../layout/Spinner';
 
-const Profile = ({ getProfiles, profile: { profiles, loading } }) => {
+const OnlineUser = ({
+  getProfiles,
+  clientProfile: { clientProfiles, loading },
+}) => {
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
@@ -21,18 +24,12 @@ const Profile = ({ getProfiles, profile: { profiles, loading } }) => {
             <Spinner />
           ) : (
             <Fragment>
-              <form className='form-allVehicles'>
-                <div className='searchBar'>
+              <form className='form'>
+                <div className='form-group'>
                   <input
                     type='text'
-                    name='allVehicles'
-                    id='allVehicles'
-                    placeholder='Search all Vehicles'
-                  />
-                  <input
-                    type='button'
-                    className='btn btn-search'
-                    value='Search'
+                    className='form-dashboard'
+                    placeholder='Search all Online users'
                   />
                 </div>
               </form>
@@ -47,15 +44,15 @@ const Profile = ({ getProfiles, profile: { profiles, loading } }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {profiles.length > 0 ? (
-                      profiles.map(profile => (
-                        <tr>
-                          <td>{profile.name}</td>
-                          <td>{profile.contact}</td>
-                          <td>{profile.email}</td>
+                    {clientProfiles.length > 0 ? (
+                      clientProfiles.map(clientProfile => (
+                        <tr key={clientProfile._id}>
+                          <td>{clientProfile.name}</td>
+                          <td>{clientProfile.contact}</td>
+                          <td>{clientProfile.email}</td>
                           <td>
                             <Link
-                              to={`sale-clients/${profile._id}`}
+                              to={`online-clients/${clientProfile._id}`}
                               className='btn btn-search'
                             >
                               View
@@ -79,13 +76,13 @@ const Profile = ({ getProfiles, profile: { profiles, loading } }) => {
   );
 };
 
-Profile.propTypes = {
+OnlineUser.propTypes = {
   getProfiles: PropTypes.func.isRequired,
-  profile: PropTypes.array.isRequired,
+  clientProfile: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile,
+  clientProfile: state.clientProfile,
 });
 
-export default connect(mapStateToProps, { getProfiles })(Profile);
+export default connect(mapStateToProps, { getProfiles })(OnlineUser);

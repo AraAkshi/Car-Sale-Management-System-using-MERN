@@ -12,8 +12,8 @@ import {
 //Add Profile
 export const addClientProfile = (
   formData,
-  history,
-  vehicle_id
+  history
+  // vehicle_id
 ) => async dispatch => {
   try {
     const config = {
@@ -22,11 +22,7 @@ export const addClientProfile = (
       },
     };
 
-    const res = await axios.post(
-      `/api/clientProfiles/${vehicle_id}`,
-      formData,
-      config
-    );
+    const res = await axios.post(`/api/clientProfiles`, formData, config);
 
     dispatch({
       type: GET_PROFILE,

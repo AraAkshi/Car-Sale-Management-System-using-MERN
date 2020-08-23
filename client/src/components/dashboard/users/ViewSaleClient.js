@@ -1,7 +1,10 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getProfileById } from '../../../actions/profile';
+import {
+  getProfileById,
+  deleteAccount,
+} from '../../../actions/saleClientProfile';
 import Spinner from '../../layout/Spinner';
 import { Link } from 'react-router-dom';
 import SideNavbar from '../SideNavbar';
@@ -9,7 +12,8 @@ import Alerts from '../../layout/Alerts';
 
 const ViewOnlineUser = ({
   getProfileById,
-  clientProfile: { clientProfile, loading },
+  deleteAccount,
+  profile: { profile, loading },
   match: { params },
 }) => {
   useEffect(() => {
@@ -26,39 +30,44 @@ const ViewOnlineUser = ({
           <Fragment>
             <Alerts />
             <p className='large'>
-              <i className='fas fa-user'></i>Online Customer Details
+              <i className='fas fa-user'></i>Sale Customer Details
             </p>
             <div className='vehicle-view-details'>
               <table className='p-content'>
                 <tbody>
                   <tr>
                     <td className='table-content-header'>Name</td>
-                    <td>{clientProfile.name}</td>
+                    <td>{profile.name}</td>
                   </tr>
                   <tr>
                     <td className='table-content-header'>Contact</td>
-                    <td>{clientProfile.contact}</td>
+                    <td>{profile.contact}</td>
                   </tr>
                   <tr>
                     <td className='table-content-header'>Email</td>
-                    <td>{clientProfile.email}</td>
+                    <td>{profile.email}</td>
                   </tr>
                   <tr>
                     <td className='table-content-header'>Address</td>
                     <td>
-                      {clientProfile.houseNo}, {clientProfile.streetName},{' '}
-                      {clientProfile.city}
+                      {profile.houseNo}, {profile.streetName}, {profile.city}
                     </td>
                   </tr>
                   <tr>
                     <td className='table-content-header'>Registered Date</td>
-                    <td>{clientProfile.regDate}</td>
+                    <td>{profile.regDate}</td>
                   </tr>
                 </tbody>
               </table>
               <Link to='/online-vehicles' className='btn btn-secondary'>
                 BACK
               </Link>
+              <button
+                onClick={() => deleteAccount(profile._id)}
+                className='btn btn-danger'
+              >
+                Delete
+              </button>
             </div>
           </Fragment>
         )}
@@ -69,11 +78,14 @@ const ViewOnlineUser = ({
 
 ViewOnlineUser.propTypes = {
   getProfileById: PropTypes.func.isRequired,
-  clientProfile: PropTypes.object.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  clientProfile: state.clientProfile,
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getProfileById })(ViewOnlineUser);
+export default connect(mapStateToProps, { getProfileById, deleteAccount })(
+  ViewOnlineUser
+);

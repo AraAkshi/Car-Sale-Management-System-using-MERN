@@ -21,18 +21,12 @@ const DirectClient = ({ getProfiles, profile: { profiles, loading } }) => {
             <Spinner />
           ) : (
             <Fragment>
-              <form className='form-allVehicles'>
-                <div className='searchBar'>
+              <form className='form'>
+                <div className='form-group'>
                   <input
                     type='text'
-                    name='allVehicles'
-                    id='allVehicles'
-                    placeholder='Search Sale Customers'
-                  />
-                  <input
-                    type='button'
-                    className='btn btn-search'
-                    value='Search'
+                    className='form-dashboard'
+                    placeholder='Search all Sale Clients'
                   />
                 </div>
               </form>
@@ -54,22 +48,17 @@ const DirectClient = ({ getProfiles, profile: { profiles, loading } }) => {
                           <td>{profile.contact}</td>
                           <td>{profile.email}</td>
                           <td>
-                            <Link to={`online-clients/${profile._id}`}>
-                              <i className='fa fa-eye' aria-hidden='true'></i>
-                            </Link>{' '}
-                            &nbsp; &nbsp;
-                            <Link to={`online-clients/edit/${profile._id}`}>
-                              <i
-                                className='fa fa-pencil-square-o'
-                                aria-hidden='true'
-                              ></i>
+                            <Link
+                              to={`sale-clients/${profile._id}`}
+                              className='btn btn-search'
+                            >
+                              VIew
                             </Link>
-                            &nbsp; &nbsp;
-                            <Link to=''>
-                              <i
-                                className='fa fa-trash-o'
-                                aria-hidden='true'
-                              ></i>
+                            <Link
+                              to={`sale-clients/edit/${profile._id}`}
+                              className='btn btn-success'
+                            >
+                              Edit
                             </Link>
                           </td>
                         </tr>
@@ -82,6 +71,10 @@ const DirectClient = ({ getProfiles, profile: { profiles, loading } }) => {
                   </tbody>
                 </table>
               </div>
+
+              <Link to='sale-clients/add-client' className='btn btn-primary'>
+                ADD CLIENT
+              </Link>
             </Fragment>
           )}
         </Fragment>

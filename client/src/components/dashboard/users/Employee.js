@@ -21,18 +21,12 @@ const Employee = ({ getEmployees, profile: { profiles, loading } }) => {
             <Spinner />
           ) : (
             <Fragment>
-              <form className='form-allVehicles'>
-                <div className='searchBar'>
+              <form className='form'>
+                <div className='form-group'>
                   <input
                     type='text'
-                    name='allVehicles'
-                    id='allVehicles'
-                    placeholder='Search all Vehicles'
-                  />
-                  <input
-                    type='button'
-                    className='btn btn-search'
-                    value='Search'
+                    className='form-dashboard'
+                    placeholder='Search all Employees'
                   />
                 </div>
               </form>
@@ -49,27 +43,22 @@ const Employee = ({ getEmployees, profile: { profiles, loading } }) => {
                   <tbody>
                     {profiles.length > 0 ? (
                       profiles.map(profile => (
-                        <tr>
+                        <tr key={profile._id}>
                           <td>{profile.name}</td>
                           <td>{profile.contact}</td>
                           <td>{profile.email}</td>
                           <td>
-                            <Link to={`employee/${profile._id}`}>
-                              <i className='fa fa-eye' aria-hidden='true'></i>
-                            </Link>{' '}
-                            &nbsp; &nbsp;
-                            <Link to={`employee/edit/${profile._id}`}>
-                              <i
-                                className='fa fa-pencil-square-o'
-                                aria-hidden='true'
-                              ></i>
+                            <Link
+                              to={`employee/${profile._id}`}
+                              className='btn btn-search'
+                            >
+                              View
                             </Link>
-                            &nbsp; &nbsp;
-                            <Link to=''>
-                              <i
-                                className='fa fa-trash-o'
-                                aria-hidden='true'
-                              ></i>
+                            <Link
+                              to={`employee/edit/${profile._id}`}
+                              className='btn btn-success'
+                            >
+                              Edit
                             </Link>
                           </td>
                         </tr>
@@ -82,7 +71,7 @@ const Employee = ({ getEmployees, profile: { profiles, loading } }) => {
                   </tbody>
                 </table>
               </div>
-              <Link to='/add-employee' className='btn btn-primary'>
+              <Link to='employee/add-employee' className='btn btn-primary'>
                 ADD EMPLOYEE
               </Link>
             </Fragment>

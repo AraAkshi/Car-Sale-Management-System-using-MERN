@@ -29,7 +29,7 @@ const Appointment = ({
             <Spinner />
           ) : (
             <Fragment>
-              <p className='x-large'>
+              <p className='large'>
                 <i className='fas fa-phone-square'></i> All Appointments
               </p>
               <div className='display-table'>
@@ -48,7 +48,7 @@ const Appointment = ({
                   <tbody>
                     {appointments.length > 0 ? (
                       appointments.map(appointment => (
-                        <tr>
+                        <tr key={appointment._id}>
                           <td>
                             {/* {appointment.customer.name} */}
                             {appointment.name}

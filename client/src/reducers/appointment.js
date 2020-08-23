@@ -37,6 +37,7 @@ export default function (state = initialState, action) {
     case DELETE_APPOINTMENT:
       return {
         ...state,
+        appointment: null,
         loading: false,
       };
     default:

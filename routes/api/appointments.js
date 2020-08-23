@@ -28,7 +28,8 @@ router.post(
 
     const appointmentFields = {};
 
-    appointmentFields.customer = req.user.id;
+    const userId = req.user.id;
+    appointmentFields.customer = userId;
     appointmentFields.vehicle = req.params.vehicle_id;
 
     if (scheduleDate) appointmentFields.scheduleDate = scheduleDate;
@@ -113,6 +114,39 @@ router.get('/my-appointments', auth, async (req, res) => {
     const userId = req.user.id;
     const appointments = await Appointment.find({
       customer: userId,
+    })
+      .populate('customer', ['name', 'contact'])
+      .populate('vehicle', [
+        'condition',
+        'make',
+        'model',
+        'manufactureYear',
+        'mileage',
+        'vehicleRegNo',
+        'specialNotes',
+      ]);
+    if (!appointments) {
+      return res
+        .status(400)
+        .json({ msg: 'You have not made any Appointments' });
+    }
+    res.json(appointments);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Appointments Not Found' });
+    }
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   GET api/appointments/:client_id
+// @desc    View appointments of an user
+// @access  private
+router.get('/:client_id', auth, async (req, res) => {
+  try {
+    const appointments = await Appointment.find({
+      customer: req.params.client_id,
     })
       .populate('customer', ['name', 'contact'])
       .populate('vehicle', [

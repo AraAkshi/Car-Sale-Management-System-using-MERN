@@ -37,6 +37,7 @@ export default function (state = initialState, action) {
     case DELETE_CLIENT_VEHICLE:
       return {
         ...state,
+        clientVehicle: null,
         loading: false,
       };
     default:

@@ -82,9 +82,26 @@ export const addSaleAppointment = (formData, history) => async dispatch => {
 };
 
 //Get Logged User Appointments
-export const getAppointmentByUserId = () => async dispatch => {
+export const getAppointmentByLoggedUserId = () => async dispatch => {
   try {
-    const res = await axios.get(`/api/vehicles/my-appointments`);
+    const res = await axios.get(`/api/appointments/my-appointments`);
+
+    dispatch({
+      type: GET_APPOINTMENTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: APPOINTMENT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get A User's Appointments
+export const getAppointmentByUserId = client_id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/appointments/${client_id}`);
 
     dispatch({
       type: GET_APPOINTMENTS,

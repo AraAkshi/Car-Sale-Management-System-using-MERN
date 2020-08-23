@@ -24,18 +24,12 @@ const OnlineVehicle = ({
             <Spinner />
           ) : (
             <Fragment>
-              <form className='form-allVehicles'>
-                <div className='searchBar'>
+              <form className='form'>
+                <div className='form-group'>
                   <input
                     type='text'
-                    name='allVehicles'
-                    id='allVehicles'
-                    placeholder='Search all Online Vehicles'
-                  />
-                  <input
-                    type='button'
-                    className='btn btn-search'
-                    value='Search'
+                    className='form-dashboard'
+                    placeholder='Search all Sale Vehicles'
                   />
                 </div>
               </form>
@@ -54,7 +48,7 @@ const OnlineVehicle = ({
                   <tbody>
                     {clientVehicles.length > 0 ? (
                       clientVehicles.map(vehicle => (
-                        <tr>
+                        <tr key={vehicle._id}>
                           <td>{vehicle.condition}</td>
                           <td>{vehicle.model}</td>
                           <td>{vehicle.make}</td>

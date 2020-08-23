@@ -28,23 +28,16 @@ const OnlineVehicles = ({
               <h1 className='large text-primary'>
                 <i className='fas fa-car'></i>Client Vehicles
               </h1>
-              <div className='searchBar'>
-                <form>
-                  <div className='form-group'>
-                    <input
-                      type='text'
-                      name='allVehicles'
-                      id='allVehicles'
-                      placeholder='Search On Sale Vehicles'
-                    />
-                  </div>
+              <p className='headers'>Vehicles put on sale by online users</p>
+              <form className='form'>
+                <div className='form-group'>
                   <input
-                    type='button'
-                    value='Search'
-                    className='btn btn-primary'
+                    type='text'
+                    className='form-dashboard'
+                    placeholder='Search Client Vehicles'
                   />
-                </form>
-              </div>
+                </div>
+              </form>
               <div className='vehicles'>
                 {clientVehicles.length > 0 ? (
                   clientVehicles.map(clientVehicle => (

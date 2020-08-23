@@ -7,8 +7,11 @@ const app = express();
 connectDB();
 
 //Init Middleware - enables body-parser which is default in express
+app.use(
+  '/uploads',
+  express.static(path.join(__dirname, 'routes', 'api', 'uploads'))
+);
 app.use(express.json({ extended: false })); //extended: false- allows us to use req object
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //Define Routes
 app.use('/api/customers', require('./routes/api/onlineCustomers'));
@@ -22,6 +25,7 @@ app.use('/api/clientProfiles', require('./routes/api/saleClientProfiles'));
 app.use('/api/clientAuth', require('./routes/api/clientAuth'));
 app.use('/api/staffAuth', require('./routes/api/staffAuth'));
 app.use('/api/saleVehicles', require('./routes/api/saleVehicles'));
+app.use('/api/reports', require('./routes/api/reports'));
 
 const port = process.env.PORT || 5000;
 

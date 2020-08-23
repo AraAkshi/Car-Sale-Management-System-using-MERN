@@ -9,10 +9,7 @@ const Customer = require('../../models/DirectCustomer');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(
-      null,
-      'D:/ISH/MIT/MIT Project/Development Project/Car_sale_mgt_system/uploads'
-    );
+    cb(null, './uploads');
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -119,6 +116,22 @@ router.get('/', async (req, res) => {
   try {
     const vehicles = await Vehicle.find({
       isInInventory: true,
+    }).populate('owner', ['name', 'contact', 'nic', 'email', 'address']);
+
+    res.json(vehicles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   GET api/sale-vehicles/sales
+// @desc    View all sold vehicles
+// @access  public
+router.get('/sales', async (req, res) => {
+  try {
+    const vehicles = await Vehicle.find({
+      sold: true,
     }).populate('owner', ['name', 'contact', 'nic', 'email', 'address']);
 
     res.json(vehicles);

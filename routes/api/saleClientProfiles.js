@@ -63,7 +63,7 @@ router.get('/', async (req, res) => {
 // @desc    Add Profile
 // @access  private
 router.post(
-  '/:vehicle_id',
+  '/',
   [
     auth,
     [
@@ -73,6 +73,11 @@ router.post(
     ],
   ],
   async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const {
       nic,
       name,
@@ -86,7 +91,7 @@ router.post(
 
     const profileFields = {};
 
-    profileFields.vehicle = req.params.vehicle_id;
+    // profileFields.vehicle = req.params.vehicle_id;
 
     if (nic) profileFields.nic = nic;
     if (name) profileFields.name = name;

@@ -4,6 +4,7 @@ import { setAlert } from './alerts';
 import {
   GET_SALE_VEHICLE,
   GET_SALE_VEHICLES,
+  GET_SOLD_VEHICLES,
   VEHICLE_ERROR,
   DELETE_SALE_VEHICLE,
 } from './types';
@@ -95,6 +96,23 @@ export const getSaleVehicles = () => async dispatch => {
 
     dispatch({
       type: GET_SALE_VEHICLES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: VEHICLE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get All Sold Vehicles
+export const getSoldVehicles = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/saleVehicles/sales');
+
+    dispatch({
+      type: GET_SOLD_VEHICLES,
       payload: res.data,
     });
   } catch (err) {

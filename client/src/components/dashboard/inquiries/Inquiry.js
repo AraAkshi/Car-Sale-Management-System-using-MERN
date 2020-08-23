@@ -27,7 +27,7 @@ const Inquiry = ({
             <Spinner />
           ) : (
             <Fragment>
-              <p className='x-large'>
+              <p className='large'>
                 <i className='fas fa-phone-square'></i> All Inquiries
               </p>
               <div className='display-table'>
@@ -45,7 +45,7 @@ const Inquiry = ({
                   <tbody>
                     {inquiries.length > 0 ? (
                       inquiries.map(inquiry => (
-                        <tr>
+                        <tr key={inquiry._id}>
                           <td>{inquiry.name}</td>
                           <td>{inquiry.contact}</td>
                           <td>

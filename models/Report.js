@@ -4,19 +4,13 @@ const ReportSchema = new mongoose.Schema({
   reportType: {
     type: String,
   },
-  duration: {
-    from: {
-      type: Date,
-    },
-    to: {
-      type: Date,
-    },
+  startDate: {
+    type: String,
+  },
+  endDate: {
+    type: String,
   },
   generatedDate: {
-    type: Date,
-    default: Date.now,
-  },
-  report: {
     type: String,
   },
 });

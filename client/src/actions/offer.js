@@ -51,9 +51,26 @@ export const addOffer = (
 };
 
 //Get Logged User Offers
-export const getOfferByUserId = () => async dispatch => {
+export const getOfferByLoggedUserId = () => async dispatch => {
   try {
-    const res = await axios.get(`/api/vehicles/my-offers`);
+    const res = await axios.get(`/api/offers/my-offers`);
+
+    dispatch({
+      type: GET_OFFERS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: OFFER_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get Logged User Offers
+export const getOfferByUserId = client_id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/offers/${client_id}`);
 
     dispatch({
       type: GET_OFFERS,

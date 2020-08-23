@@ -29,8 +29,13 @@ import SaleEditInquiry from './components/dashboard/inquiries/EditInquiry';
 import Appointment from './components/dashboard/appointments/Appointment';
 import AddSaleAppointment from './components/dashboard/appointments/AddAppointment';
 import EditAppointment from './components/dashboard/appointments/EditAppointment';
-import Report from './components/dashboard/Report';
+import Report from './components/dashboard/reports/Report';
+import CreateReport from './components/dashboard/reports/CreateReport';
+import SalesReport from './components/dashboard/reports/SalesReport';
 import OnlineUser from './components/dashboard/users/OnlineUser';
+import ViewOnlineUser from './components/dashboard/users/ViewOnlineUser';
+import ViewSaleClient from './components/dashboard/users/ViewSaleClient';
+import EditSaleClient from './components/dashboard/users/EditDirectClient';
 import Employee from './components/dashboard/users/Employee';
 import SaleClient from './components/dashboard/users/DirectClient';
 import { loadUser } from './actions/clientAuth';
@@ -153,13 +158,43 @@ const App = () => {
             <StaffPrivateRoute exact path='/reports' component={Report} />
             <StaffPrivateRoute
               exact
+              path='/reports/create-report'
+              component={CreateReport}
+            />
+            <StaffPrivateRoute
+              exact
+              path='/reports/create-report/:report_id'
+              component={SalesReport}
+            />
+            <StaffPrivateRoute
+              exact
               path='/online-clients'
               component={OnlineUser}
             />
             <StaffPrivateRoute
               exact
+              path='/online-clients/:client_id'
+              component={ViewOnlineUser}
+            />
+            <StaffPrivateRoute
+              exact
               path='/sale-clients'
               component={SaleClient}
+            />
+            <StaffPrivateRoute
+              exact
+              path='/sale-clients/:client_id'
+              component={ViewSaleClient}
+            />
+            <StaffPrivateRoute
+              exact
+              path='/sale-clients/edit/:client_id'
+              component={EditSaleClient}
+            />
+            <StaffPrivateRoute
+              exact
+              path='/sale-clients/add-client'
+              component={AddDirectClient}
             />
             <StaffPrivateRoute exact path='/employees' component={Employee} />
           </Switch>

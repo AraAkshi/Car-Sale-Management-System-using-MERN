@@ -6,8 +6,9 @@ import clientVehicle from './clientVehicle';
 import appointment from './appointment';
 import offer from './offer';
 import inquiry from './inquiry';
-import onlineUserProfile from './onlineUserProfile';
-import saleUserProfile from './saleUserProfile';
+import clientProfile from './onlineUserProfile';
+import profile from './saleUserProfile';
+import report from './report';
 
 export default combineReducers({
   alerts,
@@ -17,6 +18,7 @@ export default combineReducers({
   appointment,
   offer,
   inquiry,
-  onlineUserProfile,
-  saleUserProfile,
+  clientProfile,
+  profile,
+  report,
 });

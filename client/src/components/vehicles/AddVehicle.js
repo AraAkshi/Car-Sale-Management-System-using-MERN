@@ -78,6 +78,8 @@ const AddVehicle = ({ addVehicle, history }) => {
     data.append('price', price);
     data.append('specialNotes', specialNotes);
 
+    console.log(data);
+
     addVehicle(data, history);
   };
 
