@@ -23,6 +23,7 @@ import EditSaleVehicle from './components/dashboard/vehicles/EditVehicle';
 import ViewSaleVehicle from './components/dashboard/vehicles/ViewSaleVehicle';
 import ViewOnlineVehicle from './components/dashboard/vehicles/ViewOnlineVehicle';
 import AddDirectClient from './components/dashboard/users/AddDirectClient';
+import AddSaleBuyer from './components/dashboard/users/AddSaleBuyer';
 import Inquiry from './components/dashboard/inquiries/Inquiry';
 import SaleAddInquiry from './components/dashboard/inquiries/AddInquiry';
 import SaleEditInquiry from './components/dashboard/inquiries/EditInquiry';
@@ -35,7 +36,7 @@ import SalesReport from './components/dashboard/reports/SalesReport';
 import OnlineUser from './components/dashboard/users/OnlineUser';
 import ViewOnlineUser from './components/dashboard/users/ViewOnlineUser';
 import ViewSaleClient from './components/dashboard/users/ViewSaleClient';
-import EditSaleClient from './components/dashboard/users/EditDirectClient';
+import EditDirectClient from './components/dashboard/users/EditDirectClient';
 import Employee from './components/dashboard/users/Employee';
 import SaleClient from './components/dashboard/users/DirectClient';
 import { loadUser } from './actions/clientAuth';
@@ -57,8 +58,8 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
+          {/* Website Routes */}
           <Route exact path='/' component={Landing} />
-          <StaffPrivateRoute exact path='/dashboard' component={Dashboard} />
           <Switch>
             <Route exact path='/login' component={Login} />
             <Route exact path='/login-staff' component={StaffLogin} />
@@ -88,6 +89,8 @@ const App = () => {
               component={AddAppointment}
             />
           </Switch>
+          {/* Company Routes */}
+          <StaffPrivateRoute exact path='/dashboard' component={Dashboard} />
           <Switch>
             <StaffPrivateRoute
               exact
@@ -122,7 +125,7 @@ const App = () => {
             <StaffPrivateRoute
               exact
               path='/sale-vehicles/sale-vehicles/sold/:vehicle_id'
-              component={AddDirectClient}
+              component={AddSaleBuyer}
             />
             <StaffPrivateRoute
               exact
@@ -189,7 +192,7 @@ const App = () => {
             <StaffPrivateRoute
               exact
               path='/sale-clients/edit/:client_id'
-              component={EditSaleClient}
+              component={EditDirectClient}
             />
             <StaffPrivateRoute
               exact

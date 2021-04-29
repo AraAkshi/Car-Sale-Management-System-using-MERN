@@ -1,6 +1,6 @@
 import {
   GET_SALE_VEHICLE,
-  VEHICLE_ERROR,
+  SALE_VEHICLE_ERROR,
   GET_SALE_VEHICLES,
   GET_SOLD_VEHICLES,
   DELETE_SALE_VEHICLE,
@@ -36,7 +36,7 @@ export default function (state = initialState, action) {
         soldVehicles: payload,
         loading: false,
       };
-    case VEHICLE_ERROR:
+    case SALE_VEHICLE_ERROR:
       return {
         ...state,
         error: payload,

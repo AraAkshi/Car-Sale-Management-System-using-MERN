@@ -2,6 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import ReactPDF from '@react-pdf/renderer';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getReportById, addReport } from '../../../actions/report';
 import { getSoldVehicles } from '../../../actions/saleVehicle';
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
 const SalesReport = ({
   getReportById,
   getSoldVehicles,
-  saleVehicle: { saleVehicles },
+  saleVehicle: { soldVehicles },
   report: { report, loading },
   match: { params },
 }) => {
@@ -104,7 +105,7 @@ const SalesReport = ({
                     </tr>
                   </thead>
                   <tbody>
-                    {saleVehicles.map(vehicle => (
+                    {soldVehicles.map(vehicle => (
                       <tr>
                         <td>{vehicle.make}</td>
                         <td>{vehicle.model}</td>
@@ -115,7 +116,7 @@ const SalesReport = ({
                     <tr>
                       <td colspan='3'>TOTAL SALES</td>
                       <td>
-                        {saleVehicles.map(vehicle => {
+                        {soldVehicles.map(vehicle => {
                           totalSales = totalSales + parseInt(vehicle.price);
                         })}
                         {totalSales}
@@ -137,6 +138,9 @@ const SalesReport = ({
           </div>
         </Page>
       </Document>
+      <Link to='/reports' className='btn btn-secondary'>
+        BACK
+      </Link>
       <button className='btn btn-primary' onClick={() => onSubmit()}>
         Generate PDF
       </button>

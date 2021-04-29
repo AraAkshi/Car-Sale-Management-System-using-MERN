@@ -4,7 +4,7 @@ import { setAlert } from './alerts';
 import {
   GET_CLIENT_VEHICLE,
   GET_CLIENT_VEHICLES,
-  VEHICLE_ERROR,
+  CLIENT_VEHICLE_ERROR,
   DELETE_CLIENT_VEHICLE,
 } from './types';
 
@@ -34,7 +34,7 @@ export const addVehicle = (formData, history) => async dispatch => {
     }
 
     dispatch({
-      type: VEHICLE_ERROR,
+      type: CLIENT_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -74,7 +74,7 @@ export const updateVehicle = (
     }
 
     dispatch({
-      type: VEHICLE_ERROR,
+      type: CLIENT_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -91,7 +91,7 @@ export const getVehicleByLoggedUserId = () => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: VEHICLE_ERROR,
+      type: CLIENT_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -108,7 +108,7 @@ export const getVehicleByUserId = client_id => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: VEHICLE_ERROR,
+      type: CLIENT_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -125,7 +125,7 @@ export const getVehicles = () => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: VEHICLE_ERROR,
+      type: CLIENT_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -142,7 +142,7 @@ export const getVehicleById = vehicle_id => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: VEHICLE_ERROR,
+      type: CLIENT_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -163,7 +163,7 @@ export const deleteClientVehicle = (vehicle_id, history) => async dispatch => {
       dispatch(setAlert('Vehicle Deleted', 'danger'));
     } catch (err) {
       dispatch({
-        type: VEHICLE_ERROR,
+        type: CLIENT_VEHICLE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }

@@ -29,7 +29,7 @@ const OnlineVehicle = ({
                   <input
                     type='text'
                     className='form-dashboard'
-                    placeholder='Search all Sale Vehicles'
+                    placeholder='Search Online Client Vehicles'
                   />
                 </div>
               </form>

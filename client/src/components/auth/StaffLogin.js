@@ -3,8 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { staffLogin } from '../../actions/staffAuth';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Alerts from '../layout/Alerts';
-import SideNavbar from '../dashboard/SideNavbar';
 
 const StaffLogin = ({ staffLogin, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -28,41 +28,54 @@ const StaffLogin = ({ staffLogin, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <SideNavbar />
-      <section className='sidebar-container'>
-        <Alerts />
-        <h1 className='text-primary large'>LOGIN</h1>
-        <p className='large'>
-          <i className='fas fa-user'></i>Sign into Your Account
-        </p>
-        <form className='form' onSubmit={e => onSubmit(e)}>
-          <div className='form-group'>
-            <input
-              className='form-dashboard'
-              type='email'
-              name='email'
-              placeholder='Email'
-              value={email}
-              onChange={e => onChange(e)}
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              className='form-dashboard'
-              type='password'
-              name='password'
-              placeholder='Password'
-              value={password}
-              onChange={e => onChange(e)}
-              required
-              minLength='6'
-            />
-          </div>
-          <input type='button' value='CANCEL' className='btn btn-secondary' />
-          <input type='submit' value='LOGIN' className='btn btn-primary' />
-        </form>
-      </section>
+      <div className='login-container'>
+        <nav className='navbar-login bg-secondary'>
+          <h1>
+            <Link to='#' className='href'>
+              {' '}
+              NADEESHANS{' '}
+            </Link>
+          </h1>
+          <Fragment>
+            <Link to='/login-staff'>LOGIN</Link>
+          </Fragment>
+        </nav>
+        <section className='main-container login-jumbatron'>
+          <Alerts />
+          <h1 className='large'>WELCOME TO NADEESHANS</h1>
+          <h1 className='headers'>Dealers in Motor Vehicles</h1>
+          <p className='large'>
+            <i className='fas fa-user'></i> LOGIN
+          </p>
+          <form className='login-form' onSubmit={e => onSubmit(e)}>
+            <div>
+              <input
+                className='form-login'
+                type='email'
+                name='email'
+                placeholder='Email'
+                value={email}
+                onChange={e => onChange(e)}
+                required
+              />
+            </div>
+            <div>
+              <input
+                className='form-login'
+                type='password'
+                name='password'
+                placeholder='Password'
+                value={password}
+                onChange={e => onChange(e)}
+                required
+                minLength='6'
+              />
+            </div>
+            <input type='button' value='CANCEL' className='btn btn-secondary' />
+            <input type='submit' value='LOGIN' className='btn btn-primary' />
+          </form>
+        </section>
+      </div>
     </Fragment>
   );
 };

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const DirectCustomerSchema = new mongoose.Schema({
+  vehicle: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'salevehicles',
+  },
   nic: {
     type: String,
     unique: true,
@@ -29,6 +33,6 @@ const DirectCustomerSchema = new mongoose.Schema({
 });
 
 module.exports = DirectCustomer = mongoose.model(
-  'directcustomers',
+  'salebuyers',
   DirectCustomerSchema
 );

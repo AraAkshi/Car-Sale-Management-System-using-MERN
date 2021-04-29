@@ -21,6 +21,7 @@ app.use('/api/appointments', require('./routes/api/appointments'));
 app.use('/api/inquiries', require('./routes/api/inquiries'));
 app.use('/api/offers', require('./routes/api/offers'));
 app.use('/api/profiles', require('./routes/api/clientProfiles'));
+app.use('/api/buyerProfile', require('./routes/api/buyerProfile'));
 app.use('/api/clientProfiles', require('./routes/api/saleClientProfiles'));
 app.use('/api/clientAuth', require('./routes/api/clientAuth'));
 app.use('/api/staffAuth', require('./routes/api/staffAuth'));

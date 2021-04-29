@@ -5,7 +5,7 @@ import {
   GET_SALE_VEHICLE,
   GET_SALE_VEHICLES,
   GET_SOLD_VEHICLES,
-  VEHICLE_ERROR,
+  SALE_VEHICLE_ERROR,
   DELETE_SALE_VEHICLE,
 } from './types';
 
@@ -42,7 +42,7 @@ export const addSaleVehicle = (
     }
 
     dispatch({
-      type: VEHICLE_ERROR,
+      type: SALE_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -83,7 +83,7 @@ export const updateSaleVehicle = (
     }
 
     dispatch({
-      type: VEHICLE_ERROR,
+      type: SALE_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -100,7 +100,7 @@ export const getSaleVehicles = () => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: VEHICLE_ERROR,
+      type: SALE_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -117,7 +117,7 @@ export const getSoldVehicles = () => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: VEHICLE_ERROR,
+      type: SALE_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -134,7 +134,7 @@ export const getSaleVehicleById = vehicle_id => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: VEHICLE_ERROR,
+      type: SALE_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -155,7 +155,7 @@ export const deleteSaleVehicle = (vehicle_id, history) => async dispatch => {
       dispatch(setAlert('Vehicle Deleted', 'danger'));
     } catch (err) {
       dispatch({
-        type: VEHICLE_ERROR,
+        type: SALE_VEHICLE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
@@ -187,7 +187,7 @@ export const sellSaleVehicle = (vehicle_id, history) => async dispatch => {
     }
 
     dispatch({
-      type: VEHICLE_ERROR,
+      type: SALE_VEHICLE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }

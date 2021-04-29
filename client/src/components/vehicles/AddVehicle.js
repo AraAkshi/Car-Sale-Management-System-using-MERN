@@ -8,6 +8,7 @@ import Alerts from '../layout/Alerts';
 
 const AddVehicle = ({ addVehicle, history }) => {
   const [files, setFiles] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [formData, setFormData] = useState({
     vehicleRegNo: '',
     model: '',
@@ -50,8 +51,12 @@ const AddVehicle = ({ addVehicle, history }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const selectedImage = e => {
+    setPreviewImage(URL.createObjectURL(e.target.files[0]));
+  };
   const onFileChange = e => {
     setFiles(e.target.files);
+    selectedImage(e);
   };
 
   const onSubmit = async e => {
@@ -243,6 +248,7 @@ const AddVehicle = ({ addVehicle, history }) => {
             <small className='form-text'>
               *Maximum number of images can be added is 6
             </small>
+            <img src={previewImage} alt='chosen image' />
           </div>
           <div className='form-group'>
             <input

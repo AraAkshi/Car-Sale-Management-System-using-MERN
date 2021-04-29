@@ -1,14 +1,13 @@
 import {
-  GET_PROFILE,
-  SALE_PROFILE_ERROR,
-  UPDATE_PROFILE,
-  CLEAR_PROFILE,
-  GET_PROFILES,
+  GET_EMPLOYEE_PROFILE,
+  EMPLOYEE_PROFILE_ERROR,
+  CLEAR_EMPLOYEE_PROFILE,
+  GET_EMPLOYEE_PROFILES,
 } from '../actions/types';
 
 const initialState = {
-  profile: null,
-  profiles: [],
+  employee: null,
+  employees: [],
   loading: true,
   error: {},
 };
@@ -17,30 +16,29 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_PROFILE:
-    case UPDATE_PROFILE:
+    case GET_EMPLOYEE_PROFILE:
       return {
         ...state,
-        profile: payload,
+        employee: payload,
         loading: false,
       };
-    case GET_PROFILES:
+    case GET_EMPLOYEE_PROFILES:
       return {
         ...state,
-        profiles: payload,
+        employees: payload,
         loading: false,
       };
-    case SALE_PROFILE_ERROR:
+    case EMPLOYEE_PROFILE_ERROR:
       return {
         ...state,
         error: payload,
         loading: false,
-        profile: null,
+        employee: null,
       };
-    case CLEAR_PROFILE:
+    case CLEAR_EMPLOYEE_PROFILE:
       return {
         ...state,
-        profile: null,
+        employee: null,
       };
     default:
       return state;

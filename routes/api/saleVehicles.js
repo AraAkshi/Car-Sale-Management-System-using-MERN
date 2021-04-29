@@ -244,12 +244,17 @@ router.put(
     }
 
     try {
-      let vehicle = await Vehicle.findOneAndUpdate(
-        { _id: req.params.vehicle_id },
-        { $set: vehicleFields },
-        { new: true }
-      );
-      return res.json(vehicle);
+      let vehicle = await Vehicle.findOne({ _id: req.params.vehicle_id });
+
+      if (vehicle) {
+        //Update
+        vehicle = await Vehicle.findOneAndUpdate(
+          { _id: req.params.vehicle_id },
+          { $set: vehicleFields },
+          { new: true }
+        );
+        return res.json(vehicle);
+      }
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');

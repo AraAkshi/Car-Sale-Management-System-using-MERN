@@ -7,7 +7,10 @@ const Dashboard = props => {
   return (
     <Fragment>
       <SideNavbar />
-      <section className='sidebar-container'>
+      <section
+        className='sidebar-container'
+        style={{ backgroundColor: 'rgb(34, 34, 34)' }}
+      >
         <Alerts />
         <div className='dashboard-header'>
           <h1 className='large'>Welcome to Nadeeshans</h1>

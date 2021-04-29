@@ -1,6 +1,6 @@
 import {
   GET_CLIENT_VEHICLE,
-  VEHICLE_ERROR,
+  CLIENT_VEHICLE_ERROR,
   DELETE_CLIENT_VEHICLE,
   GET_CLIENT_VEHICLES,
 } from '../actions/types';
@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
         clientVehicles: payload,
         loading: false,
       };
-    case VEHICLE_ERROR:
+    case CLIENT_VEHICLE_ERROR:
       return {
         ...state,
         error: payload,

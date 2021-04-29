@@ -9,6 +9,7 @@ import inquiry from './inquiry';
 import clientProfile from './onlineUserProfile';
 import profile from './saleUserProfile';
 import report from './report';
+import employee from './employee';
 
 export default combineReducers({
   alerts,
@@ -21,4 +22,5 @@ export default combineReducers({
   clientProfile,
   profile,
   report,
+  employee,
 });

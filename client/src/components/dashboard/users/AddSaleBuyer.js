@@ -1,16 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateClientProfile } from '../../../actions/saleClientProfile';
+import { addBuyerProfile } from '../../../actions/saleBuyerProfile';
 import SideNavbar from '../SideNavbar';
 import PropTypes from 'prop-types';
 import Alerts from '../../layout/Alerts';
 
-const EditDirectClient = ({
-  updateClientProfile,
-  history,
-  match: { params },
-}) => {
+const AddSaleBuyer = ({ addBuyerProfile, history, match: { params } }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +14,7 @@ const EditDirectClient = ({
     streetName: '',
     city: '',
     contact: '',
-    role: '',
+    role: 'BUYER',
     nic: '',
   });
 
@@ -39,7 +35,7 @@ const EditDirectClient = ({
   const onSubmit = async e => {
     e.preventDefault();
     const vehicle_id = params.vehicle_id;
-    updateClientProfile(formData, vehicle_id, history);
+    addBuyerProfile(formData, history, vehicle_id);
   };
 
   return (
@@ -48,7 +44,7 @@ const EditDirectClient = ({
       <section className='sidebar-container'>
         <Alerts />
         <p className='large'>
-          <i className='fas fa-user'></i>Edit Customer Details
+          <i className='fas fa-user'></i>Enter Buyer Details
         </p>
         <form className='form' onSubmit={e => onSubmit(e)}>
           <div className='form-group'>
@@ -131,19 +127,8 @@ const EditDirectClient = ({
               onChange={e => onChange(e)}
             />
           </div>
-          <div className='form-group'>
-            <select
-              name='role'
-              className='form-dashboard'
-              value={role}
-              onChange={e => onChange(e)}
-            >
-              <option value='BUYER'>BUYER</option>
-              <option value='SELLER'>SELLER</option>
-            </select>
-          </div>
 
-          <Link to='/sale-clients' className='btn btn-secondary'>
+          <Link to='/sale-vehicles' className='btn btn-secondary'>
             BACK
           </Link>
           <input type='submit' value='CONFIRM' className='btn btn-primary' />
@@ -153,8 +138,8 @@ const EditDirectClient = ({
   );
 };
 
-EditDirectClient.propTypes = {
-  updateClientProfile: PropTypes.func.isRequired,
+AddSaleBuyer.propTypes = {
+  addBuyerProfile: PropTypes.func.isRequired,
 };
 
-export default connect(null, { updateClientProfile })(EditDirectClient);
+export default connect(null, { addBuyerProfile })(AddSaleBuyer);

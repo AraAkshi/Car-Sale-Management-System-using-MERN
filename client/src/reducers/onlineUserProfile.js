@@ -1,6 +1,6 @@
 import {
   GET_CLIENT_PROFILE,
-  PROFILE_ERROR,
+  CLIENT_PROFILE_ERROR,
   UPDATE_CLIENT_PROFILE,
   CLEAR_CLIENT_PROFILE,
   GET_CLIENT_PROFILES,
@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
         clientProfiles: payload,
         loading: false,
       };
-    case PROFILE_ERROR:
+    case CLIENT_PROFILE_ERROR:
       return {
         ...state,
         error: payload,

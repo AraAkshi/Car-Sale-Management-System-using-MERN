@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import SideNavbar from '../SideNavbar';
 import Alerts from '../../layout/Alerts';
 
-const ViewOnlineUser = ({
+const ViewSaleUser = ({
   getProfileById,
   deleteAccount,
   profile: { profile, loading },
@@ -76,7 +76,7 @@ const ViewOnlineUser = ({
   );
 };
 
-ViewOnlineUser.propTypes = {
+ViewSaleUser.propTypes = {
   getProfileById: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
@@ -87,5 +87,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { getProfileById, deleteAccount })(
-  ViewOnlineUser
+  ViewSaleUser
 );

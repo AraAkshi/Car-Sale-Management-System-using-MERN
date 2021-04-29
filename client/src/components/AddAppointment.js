@@ -37,6 +37,7 @@ const AddAppointment = ({ addAppointment, history, match: { params } }) => {
             <input
               type='date'
               name='scheduleDate'
+              min={new Date().toISOString().split('T')[0]}
               value={scheduleDate}
               onChange={e => onChange(e)}
               required

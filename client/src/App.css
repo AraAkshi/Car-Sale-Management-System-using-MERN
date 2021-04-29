@@ -350,6 +350,25 @@ img {
   padding: 0.45rem;
   margin: 0 5px;
 }
+.navbar-login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 5rem;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  background-color: rgb(34, 34, 34);
+  border-bottom: solid 1px #343a40;
+  opacity: 0.9;
+}
+
+.navbar-login a {
+  color: #fff;
+  padding: 0.4rem;
+  margin: 0 3px;
+}
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -451,6 +470,13 @@ img {
   height: 88vh;
   z-index: -1;
 }
+.login-jumbatron {
+  position: fixed;
+  background: url('./img/bg-image.jpg') no-repeat center center/cover;
+  height: 100%;
+  margin-top: 0;
+  z-index: -1;
+}
 .jumbatron-text {
   color: #fff;
   height: 100%;
@@ -536,7 +562,7 @@ img {
   padding: 25px 50px;
   border-style: groove;
   border-radius: 10px;
-  background-color: #f50909;
+  background-color: #b5c084;
 }
 .dashboard-notification-widget a {
   color: #fff;
@@ -649,4 +675,49 @@ img {
 .report-footer {
   margin-top: 90%;
   margin-bottom: 0;
+}
+
+.login-container {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: rgba(151, 149, 149, 0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+.main-container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto;
+  height: 100%;
+  padding-top: 30px;
+  text-align: center;
+  color: #fff;
+}
+
+.login-form input[type='text'],
+.login-form input[type='email'],
+.login-form input[type='password'] {
+  display: block;
+  width: 40%;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+
+.form-login {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboard-container {
+  background-color: rgb(34, 34, 34);
 }

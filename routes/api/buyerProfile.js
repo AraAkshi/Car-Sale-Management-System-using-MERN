@@ -63,7 +63,7 @@ router.get('/', async (req, res) => {
 // @desc    Add Profile
 // @access  private
 router.post(
-  '/',
+  '/:vehicle_id',
   [
     auth,
     [

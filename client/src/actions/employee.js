@@ -2,11 +2,10 @@ import axios from 'axios';
 import { setAlert } from './alerts';
 
 import {
-  GET_PROFILE,
-  GET_PROFILES,
-  PROFILE_ERROR,
-  CLEAR_PROFILE,
-  ACCOUNT_DELETED,
+  GET_EMPLOYEE_PROFILE,
+  GET_EMPLOYEE_PROFILES,
+  EMPLOYEE_PROFILE_ERROR,
+  CLEAR_EMPLOYEE_PROFILE,
 } from './types';
 
 //Add / Update Employees
@@ -25,7 +24,7 @@ export const addEmployee = (
     const res = await axios.post(`/api/employees`, formData, config);
 
     dispatch({
-      type: GET_PROFILE,
+      type: GET_EMPLOYEE_PROFILE,
       payload: res.data,
     });
 
@@ -49,7 +48,7 @@ export const addEmployee = (
     }
 
     dispatch({
-      type: PROFILE_ERROR,
+      type: EMPLOYEE_PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -57,18 +56,18 @@ export const addEmployee = (
 
 // Get all profiles
 export const getEmployees = () => async dispatch => {
-  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: CLEAR_EMPLOYEE_PROFILE });
 
   try {
     const res = await axios.get('api/employees');
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_EMPLOYEE_PROFILES,
       payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: EMPLOYEE_PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -80,12 +79,12 @@ export const getEmployeeById = userId => async dispatch => {
     const res = await axios.get(`api/employees/${userId}`);
 
     dispatch({
-      type: GET_PROFILE,
+      type: GET_EMPLOYEE_PROFILE,
       payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: EMPLOYEE_PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -97,13 +96,12 @@ export const deleteEmployee = userId => async dispatch => {
     try {
       await axios.delete(`api/employees/${userId}`);
 
-      dispatch({ type: CLEAR_PROFILE });
-      dispatch({ type: ACCOUNT_DELETED });
+      dispatch({ type: CLEAR_EMPLOYEE_PROFILE });
 
       dispatch(setAlert('Your account has been permanently deleted'));
     } catch (err) {
       dispatch({
-        type: PROFILE_ERROR,
+        type: EMPLOYEE_PROFILE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }

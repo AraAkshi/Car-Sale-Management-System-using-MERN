@@ -2,18 +2,17 @@ import axios from 'axios';
 import { setAlert } from './alerts';
 
 import {
-  GET_PROFILE,
-  GET_PROFILES,
-  SALE_PROFILE_ERROR,
-  CLEAR_PROFILE,
-  ACCOUNT_DELETED,
+  GET_BUYER_PROFILE,
+  GET_BUYER_PROFILES,
+  BUYER_PROFILE_ERROR,
+  CLEAR_BUYER_PROFILE,
 } from './types';
 
 //Add Profile
-export const addClientProfile = (
+export const addBuyerProfile = (
   formData,
-  history
-  // vehicle_id
+  history,
+  vehicle_id
 ) => async dispatch => {
   try {
     const config = {
@@ -22,10 +21,14 @@ export const addClientProfile = (
       },
     };
 
-    const res = await axios.post(`/api/clientProfiles`, formData, config);
+    const res = await axios.post(
+      `/api/buyerProfile/${vehicle_id}`,
+      formData,
+      config
+    );
 
     dispatch({
-      type: GET_PROFILE,
+      type: GET_BUYER_PROFILE,
       payload: res.data,
     });
 
@@ -40,13 +43,13 @@ export const addClientProfile = (
     }
 
     dispatch({
-      type: SALE_PROFILE_ERROR,
+      type: BUYER_PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
 // Update Profile
-export const updateClientProfile = (
+export const updateBuyerProfile = (
   formData,
   history,
   client_id
@@ -59,13 +62,13 @@ export const updateClientProfile = (
     };
 
     const res = await axios.post(
-      `/api/clientProfiles/${client_id}`,
+      `/api/buyerProfile/${client_id}`,
       formData,
       config
     );
 
     dispatch({
-      type: GET_PROFILE,
+      type: GET_BUYER_PROFILE,
       payload: res.data,
     });
 
@@ -79,7 +82,7 @@ export const updateClientProfile = (
     }
 
     dispatch({
-      type: SALE_PROFILE_ERROR,
+      type: BUYER_PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -87,18 +90,18 @@ export const updateClientProfile = (
 
 // Get all profiles
 export const getProfiles = () => async dispatch => {
-  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: CLEAR_BUYER_PROFILE });
 
   try {
-    const res = await axios.get('api/clientProfiles');
+    const res = await axios.get('api/buyerProfile');
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_BUYER_PROFILES,
       payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: SALE_PROFILE_ERROR,
+      type: BUYER_PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -107,15 +110,15 @@ export const getProfiles = () => async dispatch => {
 // Get profile by ID
 export const getProfileById = userId => async dispatch => {
   try {
-    const res = await axios.get(`api/clientProfiles/${userId}`);
+    const res = await axios.get(`api/buyerProfile/${userId}`);
 
     dispatch({
-      type: GET_PROFILE,
+      type: GET_BUYER_PROFILE,
       payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: SALE_PROFILE_ERROR,
+      type: BUYER_PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
@@ -125,15 +128,14 @@ export const getProfileById = userId => async dispatch => {
 export const deleteAccount = userId => async dispatch => {
   if (window.confirm('Are you sure? This can NOT be undone!')) {
     try {
-      await axios.delete(`api/clientProfiles/${userId}`);
+      await axios.delete(`api/buyerProfile/${userId}`);
 
-      dispatch({ type: CLEAR_PROFILE });
-      dispatch({ type: ACCOUNT_DELETED });
+      dispatch({ type: CLEAR_BUYER_PROFILE });
 
       dispatch(setAlert('Your account has been permanently deleted'));
     } catch (err) {
       dispatch({
-        type: SALE_PROFILE_ERROR,
+        type: BUYER_PROFILE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }

@@ -1,14 +1,14 @@
 import {
-  GET_PROFILE,
-  SALE_PROFILE_ERROR,
-  UPDATE_PROFILE,
-  CLEAR_PROFILE,
-  GET_PROFILES,
+  GET_BUYER_PROFILE,
+  BUYER_PROFILE_ERROR,
+  UPDATE_BUYER_PROFILE,
+  CLEAR_BUYER_PROFILE,
+  GET_BUYER_PROFILES,
 } from '../actions/types';
 
 const initialState = {
-  profile: null,
-  profiles: [],
+  buyerProfile: null,
+  buyerProfiles: [],
   loading: true,
   error: {},
 };
@@ -17,27 +17,27 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_PROFILE:
-    case UPDATE_PROFILE:
+    case GET_BUYER_PROFILE:
+    case UPDATE_BUYER_PROFILE:
       return {
         ...state,
-        profile: payload,
+        buyerProfile: payload,
         loading: false,
       };
-    case GET_PROFILES:
+    case GET_BUYER_PROFILES:
       return {
         ...state,
-        profiles: payload,
+        buyerProfiles: payload,
         loading: false,
       };
-    case SALE_PROFILE_ERROR:
+    case BUYER_PROFILE_ERROR:
       return {
         ...state,
         error: payload,
         loading: false,
-        profile: null,
+        buyerProfile: null,
       };
-    case CLEAR_PROFILE:
+    case CLEAR_BUYER_PROFILE:
       return {
         ...state,
         profile: null,

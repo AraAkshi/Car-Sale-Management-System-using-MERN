@@ -38,6 +38,7 @@ const Appointment = ({
                     <tr>
                       <th>NAME</th>
                       <th>CONTACT</th>
+                      <th>VEHICLE</th>
                       <th>DATE</th>
                       <th>TIME</th>
                       <th>NOTES</th>
@@ -50,12 +51,18 @@ const Appointment = ({
                       appointments.map(appointment => (
                         <tr key={appointment._id}>
                           <td>
-                            {/* {appointment.customer.name} */}
-                            {appointment.name}
+                            {appointment.customer.name
+                              ? appointment.customer.name
+                              : appointment.name}
                           </td>
                           <td>
-                            {/* {appointment.customer.contact} */}
-                            {appointment.contact}
+                            {appointment.customer.contact
+                              ? appointment.customer.contact
+                              : appointment.contact}
+                          </td>
+                          <td>
+                            {appointment.vehicle.make}{' '}
+                            {appointment.vehicle.model}
                           </td>
                           <td>{appointment.scheduleDate}</td>
                           <td>{appointment.scheduleTime}</td>
